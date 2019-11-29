@@ -14,32 +14,28 @@ class Challenge extends Component {
     if (this.state.opc === "add") {
       return (
         <div>
-          { 
-          <AddChallenge
-            addCompilationChallenge={this.props.addCompilationChallenge}
-            addTestChallenge={this.props.addTestChallenge}
-          /> }
+          { <AddChallenge/> }
         </div>
       );
     }
     else if (this.state.opc==="modify"){
       return (
         <div>
-          { <ModifyChallenge/> }
+          <ModifyChallenge/>
         </div>
       );
     }
     else if (this.state.opc==="delete"){
       return (
         <div>
-          { <DeleteChallenge/> }
+          <DeleteChallenge/>
         </div>
       );
     }
     else if (this.state.opc==="view"){
       return (
         <div>
-          { <ViewChallenge/> }
+          <ViewChallenge/>
         </div>
       );
     }
@@ -50,16 +46,16 @@ class Challenge extends Component {
             <h1> Challenge </h1> 
           </div>
            <div className="block-button"> 
-            <button className="button-submit" onClick={() => this.setState({opc:"add"})}>add challenge</button>
+            <button className="button-submit" onClick={() => this.setState({opc:"add"})}>ADD CHALLENGE</button>
           </div>
           <div className="block-button"> 
-            <button className="button-submit" onClick={() => this.setState({opc:"modify"})}>modify challenge</button>
+            <button className="button-submit" onClick={() => this.setState({opc:"modify"})}>MODIFY CHALLENGE</button>
           </div>
           <div className="block-button"> 
-            <button className="button-submit" onClick={() => this.setState({opc:"delete"})}>delete challenge</button>
+            <button className="button-submit" onClick={() => this.setState({opc:"delete"})}>DELETE CHALLENGE</button>
           </div>
           <div className="block-button"> 
-            <button className="button-submit" onClick={() => this.setState({opc:"view"})}>view challenge</button>
+            <button className="button-submit" onClick={() => this.setState({opc:"view"})}>VIEW CHALLENGE</button>
           </div>
         </div>
       )

@@ -1,5 +1,5 @@
 .button-submit {
-    padding: 14px 80px;
+    padding: 15px 80px;
     background-color: #C62828;
     color: white;
     border: 1px solid #000000;
@@ -54,4 +54,20 @@
     cursor: pointer;
     background-color: white;
     color: #C62828;
+}
+.button-table {
+    padding: 5px 20px;
+    background-color: white;
+    color: #C62828;
+    border: 2px solid black;
+    background-color: 250ms;
+    border-radius: 2px;
+    margin: 1px;
+    font-size: 15px;
+    display: block !important;
+}
+.button-table:hover {
+    cursor: pointer;
+    background-color: #C62828;
+    color: white;
 }

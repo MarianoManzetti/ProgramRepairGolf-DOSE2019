@@ -3,6 +3,8 @@ import {Button, ButtonGroup} from 'reactstrap'
 import { connect } from 'react-redux'
 import { fetchUnsolvedCompilationChallenge} from '../../actions/compilationChallengeActions'
 import { fetchUnsolvedTestChallenge} from '../../actions/testChallengeActions'
+import TableCompilationChallengeModify from'./TableCompilationChallengeModify'
+import TableTestChallengeModify from './TableTestChallengeModify'
 
 class ModifyChallenge extends Component {
 
@@ -20,7 +22,7 @@ class ModifyChallenge extends Component {
       return (
         <div className="container">
           <p>unsolved compilation challenge</p>
-          <TableCompilationChallenge
+          <TableCompilationChallengeModify
             listCompilationChallenge={this.props.unsolvedCompilationChallenge}
           />
         </div>
@@ -30,7 +32,7 @@ class ModifyChallenge extends Component {
         return (
             <div className="container">
             <p>unsolved test challenge</p>
-          <TableTestChallenge
+          <TableTestChallengeModify
             listTestChallenge={this.props.unsolvedTestChallenge}
           />
           </div>
@@ -49,8 +51,8 @@ class ModifyChallenge extends Component {
       <div className="block-button"> <h1> Modify challenge </h1>
       <div className="Block-buttonGroup">
           <ButtonGroup>
-            <Button className="button-group" onClick={() => this.setState({opc:"unsolvedCompilation"})}>unsolved compilation challenge</Button>
-            <Button className="button-group" onClick={() => this.setState({opc:"unsolvedTest"})}>unsolved test challenge</Button>
+            <Button className="button-group" onClick={() => this.setState({opc:"unsolvedCompilation"})}>compilation challenge</Button>
+            <Button className="button-group" onClick={() => this.setState({opc:"unsolvedTest"})}>test challenge</Button>
           </ButtonGroup>
         </div>
         <div>
@@ -78,71 +80,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchUnsolvedTestChallenge())
     }
   }
-}
-
-const TableCompilationChallenge = ({ listCompilationChallenge }) => {
-  const compilationChallengeList = listCompilationChallenge.map(challenge => {
-    return (
-      <tr key = {challenge.id} >
-        <td>{challenge.id}</td>
-        <td>{challenge.title}</td>
-        <td>{challenge.description}</td>
-        <td>{challenge.point}</td>
-        <td>
-          <button>View </button>
-          <button> Modify</button>
-        </td>
-      </tr>
-    )
-  });
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Points</th>
-            <th>Actions</th>
-          </tr>
-          { compilationChallengeList }
-        </tbody>
-      </table>
-    </div>
-  )
-}
-const TableTestChallenge = ({ listTestChallenge }) => {
-  const testChallengeList = listTestChallenge.map(challenge => {
-    return (
-      <tr key = {challenge.id} >
-        <td>{challenge.id}</td>
-        <td>{challenge.title}</td>
-        <td>{challenge.description}</td>
-        <td>{challenge.point}</td>
-        <td>
-          <button> View</button>
-          <button>Modify</button>
-        </td>
-      </tr>
-    )
-  });
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Points</th>
-            <th>Actions</th>
-          </tr> 
-          { testChallengeList }
-        </tbody>
-      </table>
-    </div>
-  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModifyChallenge)

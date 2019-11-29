@@ -8,15 +8,20 @@ const Ranking = ({ rankingList }) => {
     const ranking = rankingArray.map(stats => {
       return (
         <div>
-          <li>
-            { stats.username } - Points: { stats.current_points }
+          <li class="ranking">
+            <div class="rankingleft">
+              { stats.username }
+            </div>
+            <div class="rankingright">
+              { stats.current_points }
+            </div>
           </li>
         </div>
       )
     });
     return (
       <div className="ranking">
-        <h1 class="center"> Top 20 </h1>
+        <h1 class="center"> Top 20 best scores</h1>
         <ul class="ranking">
           { ranking }
         </ul>

@@ -5,8 +5,8 @@ import {
     MODIFY_TEST_CHALLENGE,
     FETCH_DATA_REQUEST,
     FETCH_DATA_SUCCESS,
-    FETCH_DATA_FAILURE
-    // DELETE_CHALLENGE
+    FETCH_DATA_FAILURE,
+    DELETE_CHALLENGE
 } from '../../constants/ActionTypesChallenges'
 
 const initChallengeState = {
@@ -66,7 +66,7 @@ const challengeReducer = (state = initChallengeState, action) => {
         // case DELETE_CHALLENGE:
         //     return {
         //         ...state,
-        //         data: state.data.filter(hacker => hacker.id !== action.id)
+        //         data: state.data.filter(challenge => challenge.id !== action.id)
         //     }
 
         default:

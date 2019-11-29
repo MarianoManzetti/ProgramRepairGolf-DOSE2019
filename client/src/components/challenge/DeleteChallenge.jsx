@@ -3,6 +3,12 @@ import {Button, ButtonGroup} from 'reactstrap'
 import { connect } from 'react-redux'
 import {fetchAllCompilationChallenge} from '../../actions/compilationChallengeActions'
 import {fetchAllTestChallenge} from '../../actions/testChallengeActions'
+import {
+  executeDeleteChallenge
+}  from '../../actions/challengeActions';
+import TableTestChallengeDelete from './TableTestChallengeDelete'
+import TableCompilationChallengeDelete from './TableCompilationChallengeDelete'
+
 
 class DeleteChallenge extends Component {
 
@@ -20,8 +26,9 @@ class DeleteChallenge extends Component {
       return (
         <div className="container">
             <p>all compilation challenge</p>
-            <TableCompilationChallenge
-                listCompilationChallenge={this.props.allCompilationChallenge}
+            <TableCompilationChallengeDelete
+              listCompilationChallenge={this.props.allCompilationChallenge}
+              executeDeleteChallenge={this.props.executeDeleteChallenge}
             />
         </div>
       );
@@ -30,8 +37,9 @@ class DeleteChallenge extends Component {
       return (
         <div className="container">
           <p>all test challenge</p>
-          <TableTestChallenge
+          <TableTestChallengeDelete
             listTestChallenge={this.props.allTestChallenge}
+            executeDeleteChallenge={this.props.executeDeleteChallenge}
           />
         </div>
       );
@@ -49,8 +57,16 @@ class DeleteChallenge extends Component {
       <div className="block-button"> <h1> Delete challenge </h1>
       <div className="Block-buttonGroup">
            <ButtonGroup>
-                <Button className="button-group" onClick={() => this.setState({opc:"allCompilation"})}>all compilation challenge</Button>
-                <Button className="button-group" onClick={() => this.setState({opc:"allTest"})}>all test challenge</Button> 
+              <Button
+                className="button-group"
+                onClick={() => this.setState({ opc: "allCompilation" })}
+                >compilation challenge
+              </Button>
+              <Button
+                className="button-group"
+                onClick={() => this.setState({opc:"allTest"})}
+                >test challenge
+              </Button> 
             </ButtonGroup>
         </div>
         <div>
@@ -65,6 +81,7 @@ const mapStateToProps = (state) => {
   return {
     allCompilationChallenge: state.allCompilationChallenge.data,
     allTestChallenge: state.allTestChallenge.data,
+    challenge: state.challenge.data
   }
 }
 
@@ -76,72 +93,11 @@ const mapDispatchToProps = (dispatch) => {
     fetchAllTestChallenge: () => {
       dispatch(fetchAllTestChallenge())
     },
+    executeDeleteChallenge: (id) => {
+      dispatch(executeDeleteChallenge(id))
+    }
   }
 }
 
-const TableCompilationChallenge = ({ listCompilationChallenge }) => {
-  const compilationChallengeList = listCompilationChallenge.map(challenge => {
-    return (
-      <tr key = {challenge.id} >
-        <td>{challenge.id}</td>
-        <td>{challenge.title}</td>
-        <td>{challenge.description}</td>
-        <td>{challenge.point}</td>
-        <td>
-          <button>View </button>
-          <button>delete</button>
-        </td>
-      </tr>
-    )
-  });
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Points</th>
-            <th>Actions</th>
-          </tr>
-          { compilationChallengeList }
-        </tbody>
-      </table>
-    </div>
-  )
-}
-const TableTestChallenge = ({ listTestChallenge }) => {
-  const testChallengeList = listTestChallenge.map(challenge => {
-    return (
-      <tr key = {challenge.id} >
-        <td>{challenge.id}</td>
-        <td>{challenge.title}</td>
-        <td>{challenge.description}</td>
-        <td>{challenge.point}</td>
-        <td>
-          <button> View</button>
-          <button>delete</button>
-        </td>
-      </tr>
-    )
-  });
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Points</th>
-            <th>Actions</th>
-          </tr> 
-          { testChallengeList }
-        </tbody>
-      </table>
-    </div>
-  )
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteChallenge)

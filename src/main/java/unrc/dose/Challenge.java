@@ -182,6 +182,7 @@ public class Challenge extends Model {
         c.setPoint(point);
         c.setOwnerSolutionId(ownerSolutionId);
         c.saveIt();
+        ChallengeStat.newChallengeStat(c.getInteger("id"));
         return c;
     }
 

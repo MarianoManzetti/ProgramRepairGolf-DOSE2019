@@ -10,7 +10,6 @@ import {
 class AddChallenge extends Component {
   
  state = {
-      user_id: 1,
       title: "",
       class_name: "",
       description: "",
@@ -59,26 +58,26 @@ class AddChallenge extends Component {
   formCompilation(){
     return (
       <div>
-          <div className="block-margin">
-            <label htmlFor="title">title:</label>
-            <input className="input-text" type="text" id="title" onChange={this.handleChange} />
-          </div>
-          <div className="block-margin">
-            <label htmlFor="class_name">class name:</label>
-            <input className="input-text" type="text" id="class_name" onChange={this.handleChange} />
-          </div>
-          <div className="block-margin">
-            <label htmlFor="description">description:</label>
-            <input className="input-text" type="text" id="description" onChange={this.handleChange} />
-          </div>
-          <div className="block-margin">
-            <label htmlFor="source">source:</label>
-            <textarea className="input-text2" rows="100" cols="100" type="text" id="source" onChange={this.handleChange} />
-          </div>
-          <div className="block-margin">
-            <label htmlFor="point">points:</label>
-            <input className="input-text" type="text" id="point" onChange={this.handleChange} />
-          </div>
+        <div className="block-margin">
+          <label htmlFor="title">title:</label>
+          <input className="input-text" type="text" id="title" onChange={this.handleChange} />
+        </div>
+        <div className="block-margin">
+          <label htmlFor="class_name">class name:</label>
+          <input className="input-text" type="text" id="class_name" onChange={this.handleChange} />
+        </div>
+        <div className="block-margin">
+          <label htmlFor="description">description:</label>
+          <input className="input-text" type="text" id="description" onChange={this.handleChange} />
+        </div>
+        <div className="block-margin">
+          <label htmlFor="source">source:</label>
+          <textarea className="input-text2" rows="100" cols="100" type="text" id="source" onChange={this.handleChange} />
+        </div>
+        <div className="block-margin">
+          <label htmlFor="point">points:</label>
+          <input className="input-text" type="text" id="point" onChange={this.handleChange} />
+        </div>
     </div>
     );
   }
