@@ -12,9 +12,9 @@ class ChallengeStat extends Component {
     goBack(){
         this.props.history.goBack();
     }
+
     componentDidMount() {
-        //this.props.fetchChallengeStat(this.props.match.params.challenge_id)
-        this.props.fetchChallengeStat(2)
+        this.props.fetchChallengeStat(this.props.match.params.challenge_id)
     }
 
   render() {
@@ -23,9 +23,9 @@ class ChallengeStat extends Component {
       challengeStat ? (
         <div className="container">
           <h3>Challenge id: {challengeStat.challenge_id}</h3>
-          <h3>Solved count: {challengeStat.solved_count}</h3>
           <h3>Average score: {challengeStat.average_score}</h3>
-          <button onClick={this.goBack}>Go Back</button>
+          <h3>Solved count: {challengeStat.solved_count}</h3>
+          <button onClick={this.goBack}> Back </button>
 
         </div>
       ) : (

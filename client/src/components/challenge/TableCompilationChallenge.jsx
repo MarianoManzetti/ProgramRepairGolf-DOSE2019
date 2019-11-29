@@ -1,7 +1,7 @@
 import React from 'react';
 import './Style.css';
 
-const TableCompilationChallenge = ({ listCompilationChallenge }) => {
+const TableCompilationChallenge = ({ listCompilationChallenge, showStatsHandler }) => {
   const compilationChallengeList = listCompilationChallenge.map(challenge => {
     return (
       <tr key = {challenge.id} >
@@ -10,6 +10,7 @@ const TableCompilationChallenge = ({ listCompilationChallenge }) => {
         <td>{challenge.description}</td>
         <td>{challenge.point}</td>
         <td> <button className="button-table"> VIEW SOURCE </button></td>
+        <td> <button onClick={showStatsHandler(challenge.id)}> STATS </button> </td>
       </tr>
     )
   });
