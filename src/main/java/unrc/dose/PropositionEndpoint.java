@@ -144,7 +144,7 @@ public class PropositionEndpoint implements Endpoint {
                     //int idChallenge = chall.getInteger("id");
                     return new Gson().toJson(
                             propositionService.submitProposition(
-                                /*idChallenge,*/ currentCode, className));
+                                /*idChallenge,*/ idProp, currentCode, className));
                 }
                 );
     }
