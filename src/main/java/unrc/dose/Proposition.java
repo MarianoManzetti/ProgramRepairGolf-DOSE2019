@@ -442,6 +442,7 @@ public class Proposition extends Model {
      * @return false if the source not compile, true otherwise.
      */
     public boolean submitProposition(
+            final int idProp,
     		//final int challengeId,
             final String proposedCode,
             final String proposedClassName) {
@@ -460,6 +461,7 @@ public class Proposition extends Model {
         this.set("distance", newDistance);
         this.set("isSolution", true);
         this.saveIt();
+        ChallengeStat.updateAverageScore(idProp);
         return true;
     }
 
