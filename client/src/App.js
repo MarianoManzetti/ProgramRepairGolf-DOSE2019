@@ -13,6 +13,7 @@ import CommentContainerChallenge from './components/comments/CommentContainerCha
 import ResponsesContainer from './components/comments/ResponsesContainer';
 import PrivateRoute from './components/PrivateRoute';
 import ResetPass from './components/componentsUser/EmailContainer';
+import PropositionPlay from './components/proposition/PropositionPlay';
 import ChallengeStat from './components/challengeStatComponents/ChallengeStat'
 
 
@@ -25,6 +26,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/about' component={About} />
+            <Route path='/hackers' component={HackersContainer} />
+            <Route path='/propositions' component={PropositionPlay} />
             <Route path='/userstats' component={UserStats} />
             <Route path="/challenge" component={Challenge} />
             <Route path='/comments' component={MenuComment} />

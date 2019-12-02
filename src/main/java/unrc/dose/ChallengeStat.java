@@ -1,6 +1,6 @@
 package unrc.dose;
 
-import java.util.List;
+import java.util.*;
 
 import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
@@ -23,7 +23,7 @@ import org.javalite.activejdbc.Model;
 /**
 * ChallengeStat class represents a person into the system.
 */
-public class ChallengeStat extends Model {
+public class ChallengeStat extends Model implements Comparable {
 
 
     /**
@@ -130,6 +130,22 @@ public class ChallengeStat extends Model {
         return this.getFloat("average_score");
     }
 
+    public static List<ChallengeStat> topFive() {
+        LazyList<ChallengeStat> allCS = ChallengeStat.findAll();
+
+        Collections.sort(allCS, Collections.reverseOrder());
+        ArrayList<ChallengeStat> topF;
+        try {
+            //sublist of sortered challenge stats
+            topF = new ArrayList<ChallengeStat>(allCS.subList(0, 4));
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("There is no enough challenges to make a top five list");
+            topF = new ArrayList<ChallengeStat>(allCS.subList(0, allCS.size()));
+        }
+
+        return topF;
+    }
+
     /**
      * hashCode redefined.
      */
@@ -153,4 +169,18 @@ public class ChallengeStat extends Model {
 
         return (this.getInteger("id") == cs2.getInteger("id"));
     }
+
+    /**
+     *Compares ChallengeStat objects.
+     *@param cs the ChallengeStat Object to compare.
+     *@return 1 if this > cs; 0 if this = cs; -1 if this < cs
+     */
+
+    @Override
+    public int compareTo(Object cs) {
+        ChallengeStat cs2 = (ChallengeStat) cs;
+
+        return this.getInteger("solved_count").compareTo(cs2.getInteger("solved_count"));
+    }
+
 }

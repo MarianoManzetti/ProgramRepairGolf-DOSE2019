@@ -442,15 +442,26 @@ public class Proposition extends Model {
      * @return false if the source not compile, true otherwise.
      */
     public boolean submitProposition(
+            final int idProp,
+    		//final int challengeId,
             final String proposedCode,
             final String proposedClassName) {
         if (!(this.compileProposition(proposedCode, proposedClassName))) {
             return false;
         }
+        /*List<TestChallenge> listChallengeTest = TestChallenge.where("challenge_id = ?", challengeId);
+        if (!(listChallengeTest.isEmpty())) {
+        	boolean resultTest = submitPropositionTest(listChallengeTest.get(0), proposedCode, proposedClassName);
+        	if (!(resultTest)) {
+        		return false;
+        	}
+        	this.set("cantTestPassed", 1);
+        }*/
         Integer newDistance = getDistanceProposition(this);
         this.set("distance", newDistance);
         this.set("isSolution", true);
         this.saveIt();
+        ChallengeStat.updateAverageScore(idProp);
         return true;
     }
 
@@ -484,10 +495,10 @@ public class Proposition extends Model {
     */
     public Map<String, Object> getMapProposition() {
         Map<String, Object> m = new HashMap<String, Object>();
-        m.put("propo_id", this.getId());
+        m.put("id", this.getId());
         m.put("user_Id", this.getUserId());
         m.put("challenge_id", this.getChallengeId());
-        m.put("source_id", this.getSource());
+        m.put("source", this.getSource());
         m.put("isSolution", this.getIsSolution());
         m.put("distance", this.getDistance());
         m.put("cantTestPassed", this.getCantTestPassed());
@@ -512,6 +523,4 @@ public class Proposition extends Model {
         }
         return result;
     }
-
-
 }

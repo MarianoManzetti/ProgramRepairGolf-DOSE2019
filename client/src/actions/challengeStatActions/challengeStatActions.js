@@ -56,9 +56,8 @@ export const fetchChallengeStats = () => {
       axios.get('http://localhost:55555/challengestat/all', {
       header: {
         Authorization: "Basic" + localStorage.getItem("token") }
-      }) 
+      })
         .then( res =>{
-          console.log(res.data);
           dispatch(fetchChallengeStatsSucess(res.data))
         })
         .catch(error => {
@@ -92,11 +91,11 @@ const fetchChallengeStatFailure = error => {
 export const fetchChallengeStat = (challenge_id) => {
   return function(dispatch) {
     dispatch(fetchChallengeStatRequest())
-    
+
     axios.get('http://localhost:55555/challengestat/get/' + challenge_id, {
     headers: {
       Authorization: "Basic" + localStorage.getItem("token") }
-    }) 
+    })
       .then( res =>{
         dispatch(fetchChallengeStatSucess(res.data))
       })
