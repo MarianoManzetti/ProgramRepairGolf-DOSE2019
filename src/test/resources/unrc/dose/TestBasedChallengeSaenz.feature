@@ -4,7 +4,7 @@ Scenario: A user resolves a previously resolved challenge again
     Given that user "pponzio" is already logged on
     And wants to solve the test based challenge with id 5
     And this challenge has not been solved yet
-    And the user already has a score assigned in this challenge
+    And the user already has a score 0 assigned in this challenge
     And the text of this challenge is
         ```
         public static int searchFirstItem(int[ ] array) {

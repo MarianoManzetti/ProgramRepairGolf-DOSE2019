@@ -1,6 +1,6 @@
 Feature: A user solves a simple test challenge with less editing distance 
 
-Scenario: User unsolves a simple unsolved test based challenge .
+Scenario: User unsolves a simple unsolved test based challenge
     Given that user "pponzio" is already logged on
     And wants to solve the test based challenge with id 5
     And this challenge has not been solved yet
@@ -11,7 +11,7 @@ Scenario: User unsolves a simple unsolved test based challenge .
                 return array[4];
         }
 ```
-    And the par for the challenge is 50;
+    And the par for the challenge is 50
     And the test of the challenge is
 ```
         @Test
