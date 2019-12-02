@@ -52,6 +52,11 @@ class ViewChallenge extends Component {
           <p>unsolved compilation challenge</p>
           <TableCompilationChallenge
             listCompilationChallenge={this.props.unsolvedCompilationChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
           />
         </div>
       );
@@ -62,6 +67,11 @@ class ViewChallenge extends Component {
          <p>resolved compilation challenge</p>
           <TableCompilationChallenge
             listCompilationChallenge={this.props.resolvedCompilationChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
           />
         </div>
       );
@@ -87,6 +97,11 @@ class ViewChallenge extends Component {
             <p>unsolved test challenge</p>
           <TableTestChallenge
             listTestChallenge={this.props.unsolvedTestChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
           />
           </div>
         );
@@ -97,6 +112,11 @@ class ViewChallenge extends Component {
             <p>resolved test challenge</p>
           <TableTestChallenge
             listTestChallenge={this.props.resolvedTestChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
           />
           </div>
         );
