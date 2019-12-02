@@ -5,6 +5,9 @@ import {
   FETCH_COMMENTS_FAILURE,
   ADD_COMMENT,
   FETCH_ADD_COMMENT_FAILURE,
+  FETCH_DELETE_COMMENT_REQUEST,
+  DELETE_COMMENT,
+  FETCH_DELETE_COMMENT_FAILURE
 } from '../../constants/ActionTypes'
 
 
@@ -42,17 +45,55 @@ const fetchAddCommentFailure = error => {
   }
 }
 
+const fetchDeleteCommentRequest = () => {
+  return {
+    type: FETCH_DELETE_COMMENT_REQUEST,
+  }
+}
+
+const fetchDeleteCommentSuccess = (id) => {
+  return {
+    type: DELETE_COMMENT,
+    payload:id
+  }
+}
+const fetchDeleteFailure = error => {
+  return {
+      type: FETCH_DELETE_COMMENT_FAILURE,
+      payload: error
+  }
+}
+
+export const fetchDeleteComment = (id) =>{
+  return function(dispatch) {
+    dispatch(fetchDeleteCommentRequest())
+     axios.delete(process.env.REACT_APP_API_HOST+'/comments/deleteComment/'+id,{
+        headers: {'Authorization' : 'Basic '+ localStorage.getItem("token")},
+        data:{
+          id:id
+        }
+    })
+      .then( res =>{
+        console.log(res.data);
+        alert('comment deleted');
+        dispatch(fetchDeleteCommentSuccess(res.data))
+      })
+      .catch(error => {
+        console.log(error)
+        alert('Error: could not delete comment');
+        dispatch(fetchDeleteFailure(error))
+      })
+  }
+}
 
 
 //
 export const fetchCommentsUsers = (id) => {
   return function(dispatch, getState) {
       dispatch(fetchCommentsRequest())
-      let base64 = require('base-64');
-      const user = localStorage.getItem('username');
-      const pass = localStorage.getItem('password');
+      const token = localStorage.getItem('token');
        axios.get(process.env.REACT_APP_API_HOST+'/comments/users/'+id, {
-        headers: {'Authorization' : 'Basic '+ base64.encode(user+ ":"+ pass)},
+        headers: {'Authorization' : 'Basic '+ token},
       })
         .then( res =>{
           let result = [];
@@ -60,7 +101,6 @@ export const fetchCommentsUsers = (id) => {
           Object.values(res.data).forEach(item => {
               result = result.concat(item);
           });
-          console.log(result);
           dispatch(fetchCommentsSucess(result))
         })
         .catch(error => {
@@ -72,20 +112,17 @@ export const fetchCommentsUsers = (id) => {
 //
 export const fetchAddComment = (state) => {
   return function(dispatch, getState) {
-      console.log(state.challenge_id);
       dispatch(fetchCommentsRequest())
-      let base64 = require('base-64');
-      const user = localStorage.getItem('username');
-      const pass = localStorage.getItem('password');
+      const token = localStorage.getItem('token');
        axios.post(process.env.REACT_APP_API_HOST+'/comments/createComment',{
          title: state.title,
          description: state.description,
          userId: state.user_id,
          challengeId: state.challenge_id},{
-        headers: {'Authorization' : 'Basic '+ base64.encode(user+ ":"+ pass)},
+        headers: {'Authorization' : 'Basic '+ token},
       })
         .then( res =>{
-        
+
           console.log(res.data);
           dispatch(fetchAddCommentsSucess(res.data))
         })
@@ -98,13 +135,10 @@ export const fetchAddComment = (state) => {
 //
 export const fetchCommentsChallenge = (id) => {
   return function(dispatch, getState) {
-   
       dispatch(fetchCommentsRequest())
-      let base64 = require('base-64');
-      const user = localStorage.getItem('username');
-      const pass = localStorage.getItem('password');
+      const token = localStorage.getItem('token');
        axios.get(process.env.REACT_APP_API_HOST+'/comments/challenges/'+id, {
-         headers: {'Authorization' : 'Basic '+ base64.encode(user+ ":"+ pass)},
+         headers: {'Authorization' : 'Basic '+ token},
       })
         .then( res =>{
           let result = [];
@@ -120,6 +154,5 @@ export const fetchCommentsChallenge = (id) => {
           dispatch(fetchCommentsFailure(error))
         })
     }
-  
-}
 
+}

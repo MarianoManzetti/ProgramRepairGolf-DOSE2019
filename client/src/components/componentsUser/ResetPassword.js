@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import {Link} from 'react-router-dom';
-import f  from '../Authorization';
 
 export default class ResetPassword extends Component{
   state = {
@@ -41,6 +38,7 @@ export default class ResetPassword extends Component{
               </div>
               <button type="submit" >Enviar Email</button>
             </form>
+            <h3>Presione el boton de Home, para iniciar sesion con la nueva contraseña</h3>
           </div>
         </div>
       );

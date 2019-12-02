@@ -57,6 +57,7 @@ public final class CommentEndpoint implements Endpoint {
                  .withDescription("challenge's id").and()
              .withResponseType(String.class),
           (req, res) -> {
+            System.out.println("ACAAAAAAAAAAAAAA"+req.params(":id"));
             return commentService.view(
               Integer.parseInt(req.params(":id")), new Challenge());
           }
@@ -133,16 +134,16 @@ public final class CommentEndpoint implements Endpoint {
                       Integer.parseInt(bodyParams.get("commentId").toString()));
           }
       )
-      .post(
-        path("/deleteComment")
+      .delete(
+        path("/deleteComment/:id")
             .withDescription("Deletes a Comment with it's Responses")
-            .withQueryParam()
+            .withPathParam()
                 .withName("id")
-                .withDescription("Response's body").and()
+                .withDescription("comment_id").and()
             .withResponseType(String.class),
              "application/json",
         (req, res) -> {
-            return commentService.delete(Integer.parseInt(req.queryParams("commentId")));
+          return commentService.delete(Integer.parseInt(req.params(":id")));
         }
     );
   }

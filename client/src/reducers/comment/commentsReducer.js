@@ -3,7 +3,11 @@ import {
     FETCH_COMMENTS_SUCCESS,
     FETCH_COMMENTS_FAILURE,
     ADD_COMMENT,
-    FETCH_ADD_COMMENT_FAILURE
+    FETCH_ADD_COMMENT_FAILURE,
+    FETCH_DELETE_COMMENT_REQUEST,
+    DELETE_COMMENT,
+    FETCH_DELETE_COMMENT_FAILURE,
+
 } from '../../constants/ActionTypes'
 
 const initCommentsState = {
@@ -54,7 +58,27 @@ const commentsReducer = (state = initCommentsState, action) => {
                   count: state.count,
                   error: action.payload,
               }
+              case DELETE_COMMENT:
+                return {
+                    ...state,
+                    loading:false,
+                    count: state.count - 1,
+                    data: state.data.filter(comment => comment.id !== action.payload.id)
+                }
+            case FETCH_DELETE_COMMENT_FAILURE:
+                return{
+                    ...state,
+                    data:[],
+                    loading:false,
+                    count:0,
+                    error: action.payload,
+                }
 
+            case FETCH_DELETE_COMMENT_REQUEST:
+                return {
+                    ...state,
+                    loading: true
+                }
         default:
             return state
     }

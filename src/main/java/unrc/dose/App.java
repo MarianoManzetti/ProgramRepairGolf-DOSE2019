@@ -45,10 +45,11 @@ public class App
 										urlReset = "";
 									}
 								}
-								if(!(urlCreate.equals(CREATE_ACCOUNT_ROUTE))){
-									if(!(urlReset.equals(RESET_ROUTE))){
-										if (request.requestMethod() != "OPTIONS"){
-								String headerToken = (String) request.headers("Authorization");
+								if (request.requestMethod() != "OPTIONS"){
+								if((urlCreate == null) ||(!(urlCreate.equals(CREATE_ACCOUNT_ROUTE)))){
+
+									if(urlReset.equals(RESET_ROUTE) != true){
+										String headerToken = (String) request.headers("Authorization");
 
 									if (
 										headerToken == null ||

@@ -160,20 +160,25 @@ public static Comment findComment(final int id) {
     return aux;
   }
   //Borrar un comentario
-  public static void deleteComment(final int id) {
+  public static Comment deleteComment(final int id) {
     Comment c = new Comment();
     c = Comment.findById(id);
+    Comment cm= Comment.findById(id);
     if (c==null){
       throw new IllegalArgumentException("Comment does not exists");
     }
     else{
-      List<Comment> listresp = Comment.where("comment_id = ?", id);
-      if (listresp!=null){
-        for (Comment r: listresp){
-          r.delete();
+        if (isResponse(id)){
+        int comment_id= cm.getInteger("comment_id");
+        List<Comment> listResp = Comment.where("comment_id=?",comment_id);
+        if(listResp.size()==1){
+          Comment father= Comment.findById(comment_id);
+          father.set("responses",false);
+          father.saveIt();
         }
       }
-      c.delete();
+      c.deleteCascade();
+      return cm;
     }
   }
 }

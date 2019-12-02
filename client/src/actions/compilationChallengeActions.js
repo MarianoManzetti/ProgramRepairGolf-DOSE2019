@@ -16,7 +16,7 @@ const fetchAllCompilationChallengeRequest = () => {
       type: FETCH_ALL_COMPILATION_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchAllCompilationChallengeSucess = allCompilationChallenge => {
     return {
         type: FETCH_ALL_COMPILATION_CHALLENGE_SUCCESS,
@@ -32,12 +32,14 @@ const fetchAllCompilationChallengeFailure = error => {
 }
 
 export const fetchAllCompilationChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchAllCompilationChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/all', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{
@@ -54,7 +56,7 @@ const fetchResolvedCompilationChallengeRequest = () => {
       type: FETCH_RESOLVED_COMPILATION_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchResolvedCompilationChallengeSucess = resolvedCompilationChallenge => {
     return {
         type: FETCH_RESOLVED_COMPILATION_CHALLENGE_SUCCESS,
@@ -70,12 +72,14 @@ const fetchResolvedCompilationChallengeFailure = error => {
 }
 
 export const fetchResolvedCompilationChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchResolvedCompilationChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/resolved', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{
@@ -92,7 +96,7 @@ const fetchUnsolvedCompilationChallengeRequest = () => {
       type: FETCH_UNSOLVED_COMPILATION_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchUnsolvedCompilationChallengeSucess = unsolvedCompilationChallenge => {
     return {
         type: FETCH_UNSOLVED_COMPILATION_CHALLENGE_SUCCESS,
@@ -108,12 +112,14 @@ const fetchUnsolvedCompilationChallengeFailure = error => {
 }
 
 export const fetchUnsolvedCompilationChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchUnsolvedCompilationChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/unsolved', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{

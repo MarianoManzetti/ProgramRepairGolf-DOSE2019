@@ -9,15 +9,20 @@ public class BasicAuth {
     final String[] creds = getCredentials(headerAuth);
     String pass = creds[1];
     Password passUser = Password.findFirst("username = ?", creds[0]);
-    byte[] salt = (byte[]) passUser.get("salt");
+    if(passUser != null) {
 
-    byte[] passSaved = Password.hash(pass.toCharArray(), salt);
+      byte[] salt = (byte[]) passUser.get("salt");
 
-    return User.findFirst(
-      "username = ? AND password = ?",
-      creds[0],
-      passSaved
-    ) != null;
+      byte[] passSaved = Password.hash(pass.toCharArray(), salt);
+
+      return User.findFirst(
+        "username = ? AND password = ?",
+        creds[0],
+        passSaved
+        ) != null;
+    } else {
+      return false;
+    }
   }
 
   static User getUser(String headerAuth) {

@@ -197,8 +197,9 @@ public class User extends Model {
      * @param email : the email of the user who wants to change the username
      * @return A String the new pass
      */
-    public static String resetPassword(final String email) {
+    public static Boolean resetPassword(final String email) {
       User user = User.findFirst(EMAIL + " = ? ", email);
+      Boolean flag = false;
       if (user != null) {
         String name = user.getName();
         Password passUser = Password.findFirst(USERNAME + " = ?", name);
@@ -208,10 +209,12 @@ public class User extends Model {
         user.set(PASSWORD, passw);
         user.saveIt();
         Email.sendMail(newpass, email);
-        return newpass;
+
+        flag = true;
         } else {
-            return null;
+            flag = false;
         }
+        return flag;
     }
 
     /**.

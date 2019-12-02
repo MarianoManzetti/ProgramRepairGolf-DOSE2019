@@ -13,6 +13,7 @@ import {
 } from '../../actions/testChallengeActions'
 import TableCompilationChallenge from './TableCompilationChallenge'
 import TableTestChallenge from './TableTestChallenge'
+import { withRouter } from 'react-router-dom'
 
 class ViewChallenge extends Component {
 
@@ -37,9 +38,10 @@ class ViewChallenge extends Component {
             <TableCompilationChallenge
                 listCompilationChallenge={this.props.allCompilationChallenge}
                 showStatsHandler = {(id) => () => {
-                    this.props.history.push({
-                      pathname: '/challenges/' + id + '/stats',
-                    })
+                	this.props.history.push({
+                	  pathname: '/challenges/' + id + '/stats',
+                	})
+                }}
             />
         </div>
       );
@@ -50,11 +52,6 @@ class ViewChallenge extends Component {
           <p>unsolved compilation challenge</p>
           <TableCompilationChallenge
             listCompilationChallenge={this.props.unsolvedCompilationChallenge}
-            showStatsHandler = {(id) => () => {
-                this.props.history.push({
-                  pathname: '/challenges/' + id + '/stats',
-                })
-            }}
           />
         </div>
       );
@@ -65,11 +62,6 @@ class ViewChallenge extends Component {
          <p>resolved compilation challenge</p>
           <TableCompilationChallenge
             listCompilationChallenge={this.props.resolvedCompilationChallenge}
-            showStatsHandler = {(id) => () => {
-                this.props.history.push({
-                  pathname: '/challenges/' + id + '/stats',
-                })
-            }}
           />
         </div>
       );
@@ -84,6 +76,7 @@ class ViewChallenge extends Component {
                 this.props.history.push({
                   pathname: '/challenges/' + id + '/stats',
                 })
+            }}
           />
         </div>
       );
@@ -172,4 +165,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewChallenge)
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withRouter(ViewChallenge)
+)

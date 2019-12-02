@@ -69,6 +69,8 @@ const fetchDataFailure = error => {
 export const addCompilationChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/compilationChallenge/create', null, {
             params:{
@@ -81,7 +83,7 @@ export const addCompilationChallenge = (state) => {
                 ownerSolutionId: state.owner_solution_id
             },
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res => {
@@ -96,6 +98,8 @@ export const addCompilationChallenge = (state) => {
 export const addTestChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/testChallenge/create', null, {
             params:{
@@ -109,7 +113,7 @@ export const addTestChallenge = (state) => {
                 test: state.test
             },
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res => {
@@ -122,11 +126,13 @@ export const addTestChallenge = (state) => {
 }
 
 export const executeDeleteChallenge = (id) => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.delete('http://localhost:55555/challenge/' + id , {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res => {

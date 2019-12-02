@@ -20,6 +20,7 @@ const userReducer = (state = initUserState, action) => {
 
         case FETCH_USER_SUCCESS:
             // aumentating USER adding 'id'
+            console.log(action.payload);
             return {
                 ...state,
                 loading: false,

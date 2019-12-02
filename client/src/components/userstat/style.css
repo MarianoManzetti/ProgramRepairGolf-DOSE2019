@@ -12,6 +12,13 @@ div.right {
     margin-right: 5%;
 }
 
+div.buttonRight {
+
+    float: right;
+    width: 40%;
+    height: 100%;
+}
+
 div.rankingleft {
     float: left;
     width: 58%;

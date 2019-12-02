@@ -80,13 +80,20 @@ public final class UserEndpoint implements Endpoint {
                 Map<String,Object> bodyParams = new Gson().fromJson(req.body(),Map.class);
 
 
-                if (User.userExistsByUsername((String)bodyParams.get("username")) || User.userExistsByEmail((String)bodyParams.get("email_address"))) {
-                    return "Nombre de usuario o email ya utilizados";
-                } else {
-                    User user = User.set((String)bodyParams.get("username"), (String)bodyParams.get("password"), (String)bodyParams.get("email_address"), false);
-
-                    return"username: "+ (String)user.get("username")+ (String)user.get("email_address");
-                }
+                if (!User.userExistsByUsername((String)bodyParams.get("username"))) {
+                    if(!User.userExistsByEmail((String)bodyParams.get("email_address"))) {
+                      res.status(200);
+                      User.set((String)bodyParams.get("username"),(String)bodyParams.get("password"), (String)bodyParams.get("email_address"), true);
+                      return"";
+                    } else {
+                      res.status(401);
+                      return"";
+                    }
+                  }else {
+                    res.status(401);
+                  }
+                System.out.println(res.status());
+                return"";
 
             }
         )
@@ -126,8 +133,15 @@ public final class UserEndpoint implements Endpoint {
                 .withResponseType(String.class),
             (req, res) -> {
             Map<String,Object> bodyParams = new Gson().fromJson(req.body(),Map.class);
+            String email = (String) bodyParams.get("email_address");
 
-                return(User.resetPassword((String)bodyParams.get("email_address")));
+            if(User.resetPassword(email)) {
+                res.status(200);
+            } else {
+                res.status(401);
+            }
+            System.out.println(res.status());
+              return "";
             }
         )
 

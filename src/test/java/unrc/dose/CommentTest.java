@@ -51,6 +51,7 @@ public class CommentTest {
   @Test
   public void loadResponse() {
     Comment c = new Comment();
+    c.set("username","Username");
     c.set("title", "Titulo");
     c.set("description", "Descripcion");
     c.set("challenge_id", ch.getInteger("id"));
@@ -65,6 +66,7 @@ public class CommentTest {
   @Test
   public void deleteAComment(){
     Comment c = new Comment();
+    c.set("username","Username");
     c.set("title", "Titulo");
     c.set("description", "Descripcion");
     c.set("challenge_id", ch.getInteger("id"));

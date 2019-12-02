@@ -66,8 +66,6 @@ public final class CommentService {
   *@return void
   **/
   public String delete(final int id) {
-    Comment.deleteComment(id);
-    String aux = "ok";
-    return aux;
+    return Comment.deleteComment(id).toJson(true);
   }
 }

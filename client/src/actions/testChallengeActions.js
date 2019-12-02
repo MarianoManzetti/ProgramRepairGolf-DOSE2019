@@ -16,7 +16,7 @@ const fetchAllTestChallengeRequest = () => {
       type: FETCH_ALL_TEST_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchAllTestChallengeSucess = allTestChallenge => {
     return {
         type: FETCH_ALL_TEST_CHALLENGE_SUCCESS,
@@ -32,12 +32,14 @@ const fetchAllTestChallengeFailure = error => {
 }
 
 export const fetchAllTestChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchAllTestChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/testChallenge/all', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{
@@ -54,7 +56,7 @@ const fetchResolvedTestChallengeRequest = () => {
       type: FETCH_RESOLVED_TEST_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchResolvedTestChallengeSucess = resolvedTestChallenge => {
     return {
         type: FETCH_RESOLVED_TEST_CHALLENGE_SUCCESS,
@@ -70,12 +72,14 @@ const fetchResolvedTestChallengeFailure = error => {
 }
 
 export const fetchResolvedTestChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchResolvedTestChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/testChallenge/resolved', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{
@@ -92,7 +96,7 @@ const fetchUnsolvedTestChallengeRequest = () => {
       type: FETCH_UNSOLVED_TEST_CHALLENGE_REQUEST
     }
 }
-  
+
 const fetchUnsolvedTestChallengeSucess = unsolvedTestChallenge => {
     return {
         type: FETCH_UNSOLVED_TEST_CHALLENGE_SUCCESS,
@@ -108,12 +112,14 @@ const fetchUnsolvedTestChallengeFailure = error => {
 }
 
 export const fetchUnsolvedTestChallenge = () => {
-    return function(dispatch) {
+    return function(dispatch,getState) {
         dispatch(fetchUnsolvedTestChallengeRequest())
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/testChallenge/unsolved', {
             headers: {
-                Authorization: "Basic" + localStorage.getItem("token")
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
             }
         })
         .then( res =>{

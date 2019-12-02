@@ -1,15 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 
-const Responses = ({ responses }) => {
-  console.log(responses);
-    const responsesList = responses.map(responses => {
-      const id = responses.id;
+
+const Responses = ({ responses, id, user_id, deleteResponse }) => {
+ let result = [];
+ Object.values(responses).forEach(item => {
+    if(item === responses[id]){
+     result = result.concat(item);
+    }
+ })
+
+    const responsesList = Object.keys(result).map((key, index) => {
+      const res = result[key];
       return (
-        <div className="responses card" key={id}>
+        <div className="responses card" key={key}>
           <div className="card-content">
-            <p>description: { responses.description }</p>
+            <p>Re: {res.username} </p>
+            <p>description: { res.description }</p>
+            {user_id === res.user_id ?(
+                <div>
+                  <button onClick={()=>deleteResponse(res.id)}> Delete </button>
+                </div>
+            ):(
+                <div>
+                </div>
+            )}
           </div>
         </div>
       )

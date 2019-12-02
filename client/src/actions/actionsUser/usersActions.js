@@ -89,11 +89,18 @@ export const newAccount = (user, pass, email) =>{
       method: 'POST',
        body:JSON.stringify({'username': user, 'password':pass, 'email_address':email})
       })
-     .then( res => {
-        dispatch(fetchUserSucess(res.data))
+      .then(function(response) {
+        if(response.ok) {
+        dispatch(fetchUserSucess(response.data));
+        alert('Usuario creado exitosamente.')
+      } else {
+        dispatch(fetchUserFailure("error"));
+        alert('El nombre de usuario o el email ya estan siendo utilizados. Cargue otros.');
+      }
      })
      .catch( error => {
-        dispatch(fetchUserFailure(error.message))
+        dispatch(fetchUserFailure(error.message));
+        alert('El nombre de usuario o el email ya se encuentran utilizados. Cargue otros. ');
      })
   }
 }
@@ -116,7 +123,6 @@ export const login = (user, pass) =>{
       })
       .then(function(myJson) {
         dispatch(fetchUserSucess(myJson));
-        alert('Usuario logueado correctamente');
      })
      .catch( error => {
        dispatch(fetchUserFailure(error.message));
@@ -131,13 +137,23 @@ export const login = (user, pass) =>{
      dispatch(fetchUserRequest())
       fetch('http://localhost:55555/user/resetPassword', {
        method: 'PUT',
-       body:JSON.stringify({'email_address': email})
+       body:JSON.stringify({'email_address': email}),
+       mode:'cors',
+       cache:'default',
        })
-       .then( res =>{
-         dispatch(fetchUserSucess(res.data))
+       .then(function(response) {
+         if(response.ok) {
+         dispatch(fetchUserSucess(response.data));
+         alert('Email enviado exitosamente.')
+       } else {
+         dispatch(fetchUserFailure("error"));
+         alert('No existe ningun usuario asociado al mail cargado.');
+       }
        })
        .catch(error => {
-         dispatch(fetchUserFailure(error.message))
+         dispatch(fetchUserFailure(error.message));
+         alert('No existe ningun usuario asociado al mail cargado.');
+
        })
     }
   }

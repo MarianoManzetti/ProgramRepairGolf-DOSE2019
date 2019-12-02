@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import Challenge from './components/challenge/Challenge'
 
 import MenuComment from './components/comments/MenuComment';
+import CommentContainerChallenge from './components/comments/CommentContainerChallenge';
 import ResponsesContainer from './components/comments/ResponsesContainer';
 import PrivateRoute from './components/PrivateRoute';
 import ResetPass from './components/componentsUser/EmailContainer';
@@ -27,9 +28,10 @@ class App extends Component {
             <Route path='/userstats' component={UserStats} />
             <Route path="/challenge" component={Challenge} />
             <Route path='/comments' component={MenuComment} />
+            <Route path='/challenges_comments/:id' component={CommentContainerChallenge} />
             <Route path='/responses/:id' component={ResponsesContainer} />
             <Route exact path='/resetPassword' component={ResetPass}/>
-            <Route path="/challengestat" component={ChallengeStat} />
+            <Route path="/challenges/:challenge_id/stats" component={ChallengeStat} />
             <PrivateRoute path='/hackers' component={HackersContainer} />
             <Route path="/:hacker_id" component={Hacker} ></Route>
           </Switch>

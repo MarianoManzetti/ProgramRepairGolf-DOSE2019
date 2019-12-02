@@ -32,9 +32,10 @@ const fetchRankingFailure = error => {
 export const fetchRanking = () => {
   return function(dispatch, getState) {
       dispatch(fetchRankingRequest())
-
-      axios.get('http://localhost:55555/userstats/ranking?number=20', 
-      {headers:{ Authorization: "Basic " + localStorage.getItem("token")}})
+      let base64 = require('base-64');
+      let username = getState().user.currentUser.username;
+      axios.get('http://localhost:55555/userstats/ranking?number=20',
+      {headers:{ Authorization: "Basic " + base64.encode(username + ":" +localStorage.getItem("password"))}})
         .then( res =>{
           dispatch(fetchRankingSucess(res.data))
         })
@@ -68,9 +69,11 @@ export const fetchRanking = () => {
   export const fetchIndividualUserStats = () => {
     return function(dispatch, getState){
       dispatch(fetchIndividualStatsRequest())
+      let base64 = require('base-64');
       let userid = getState().user.currentUser.id;
+      let username = getState().user.currentUser.username;
       axios.get('http://localhost:55555/userstats?id='+userid,
-      {headers:{ Authorization: "Basic " + localStorage.getItem("token")}})
+      {headers:{ Authorization: "Basic " + base64.encode(username + ":" +localStorage.getItem("password"))}})
         .then( res =>{
           dispatch(fetchIndividualStatsSucess(res.data))
         })

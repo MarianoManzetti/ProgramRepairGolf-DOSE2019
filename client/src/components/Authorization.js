@@ -1,8 +1,3 @@
-import React from 'react';
-import axios from 'axios';
-import {
-  FETCH_USERS_FAILURE
-} from '../constants/constantsUser/ActionTypes'
 
 
 const Authorization = {
@@ -21,16 +16,17 @@ const Authorization = {
       })
       .then(function(response) {
         Authorization.isAuthenticated = true;
-        localStorage.setItem('token', base64.encode(user+ ":"+ pass));
+        localStorage.setItem('username', user);
+        localStorage.setItem('password', pass);
       })
       .catch( error => {
-        Authorization.isAuthenticated = false
+        Authorization.isAuthenticated = false;
       })
     },
     signout(cb) {
       Authorization.isAuthenticated = false;
-      localStorage.removeItem('token');
-      alert('Deslogueado exitosamente');
+      localStorage.removeItem('username');
+      localStorage.removeItem('pass');
     }
 }
 

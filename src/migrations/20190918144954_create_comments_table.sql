@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS comments(
     comment_id integer default null,
     username varchar(20) not null,
     constraint ci foreign key (challenge_id) references challenges(id),
-    constraint cmi foreign key (comment_id) references comments(id),
+    constraint cmi foreign key (comment_id) references comments(id) on delete cascade,
     constraint ui foreign key (user_id) references users(id),
     created_at DATETIME,
     updated_at DATETIME

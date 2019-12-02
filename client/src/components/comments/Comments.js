@@ -1,51 +1,47 @@
 import React, { Component } from 'react';
+import Comment from './Comment';
+import { Link } from 'react-router-dom';
 import AddResponse from './AddResponse';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {fetchAddResponse} from '../../actions/comment/responsesActions';
 
 class Comments extends Component{
-    state={
-      comment_id: null,
-      press:false
-    }
+  state={
+    comment_id: null,
+  }
 
-    handleClick = id => (e) => {
-      this.setState({press:true, comment_id: id});
-    }
+
+  handleDeleteClick = id => (e)=>{
+    this.props.deleteComment(id);
+  }
 
     commentList(){
-      const press= this.state.press;
       const id = this.state.comment_id;
       const comments= this.props.comments;
-      console.log(id);
-      console.log(press);
+
+      const currentuser_id = this.props.user_id;
+      const responses= this.props.responses;
       return comments.map(comment =>
           <div className="comment card" key={comment.id}>
-            <div className="card-content">
-              <p>title: { comment.title } </p>
-              <p>description: { comment.description }</p>
-              { comment.responses ?(
+              <Comment comment={comment}/>
+
+              <Link to={"/responses/"+comment.id}> Reply </Link>
+              {currentuser_id === comment.user_id ?(
                 <div>
-              <Link to={'/responses/'+ comment.id} comment_id={comment.id}> Show responses </Link>
-               </div>
-               ):(
-               <div>
-               </div>
-              )}
-              {id === comment.id & press ?(
-                <div>
-                <AddResponse addResponse={this.props.addResponse} comment_id={comment.id} challenge_id={comment.challenge_id}/>
+                  <button onClick={this.handleDeleteClick(comment.id)}> Delete </button>
                 </div>
               ):(
                 <div>
-                  <button onClick={this.handleClick(comment.id)}> Reply</button>
                 </div>
               )}
-
-
-            </div>
-
+             { comment.responses ?(
+                <div>
+                  <Link to={{pathname:'/responses/'+ comment.id, state:{c:comment}}}> Show responses </Link>
+                </div>
+              ):(
+                <div>
+                </div>
+              )}
           </div>
 
         )
@@ -64,21 +60,19 @@ class Comments extends Component{
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    responses: state.responses,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
-  console.log();
   return {
     addResponse: (res) => {
       dispatch(fetchAddResponse(res))
     },
+
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.comments.data,
-    loading: state.comments.loading,
-  }
-}
-
-export default  connect(mapStateToProps, mapDispatchToProps)(Comments)
+export default connect(mapStateToProps, mapDispatchToProps)(Comments)
