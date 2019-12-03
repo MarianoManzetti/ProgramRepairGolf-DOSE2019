@@ -130,14 +130,14 @@ public class ChallengeStat extends Model implements Comparable {
         return this.getFloat("average_score");
     }
 
-    public static ArrayList<ChallengeStat> topFive() {
+    public static List<ChallengeStat> topFive() {
         LazyList<ChallengeStat> allCS = ChallengeStat.findAll();
 
         Collections.sort(allCS, Collections.reverseOrder());
         ArrayList<ChallengeStat> topF;
         try {
             //sublist of sortered challenge stats
-            topF = new ArrayList<ChallengeStat>(allCS.subList(0, 5));
+            topF = new ArrayList<ChallengeStat>(allCS.subList(0, 4));
         } catch(IndexOutOfBoundsException e) {
             System.out.println("There is no enough challenges to make a top five list");
             topF = new ArrayList<ChallengeStat>(allCS.subList(0, allCS.size()));
@@ -166,8 +166,8 @@ public class ChallengeStat extends Model implements Comparable {
     @Override
     public boolean equals(final Object cs) {
         ChallengeStat cs2 = (ChallengeStat) cs;
-        
-        return ((int) this.getId() == (int) cs2.getId());
+
+        return (this.getInteger("id") == cs2.getInteger("id"));
     }
 
     /**
