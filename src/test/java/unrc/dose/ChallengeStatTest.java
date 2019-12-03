@@ -218,9 +218,9 @@ public class ChallengeStatTest {
 
         ChallengeStat c = ChallengeStat.findFirst("challenge_id = ?", challengeId);
         ChallengeStat result = ChallengeStat.getChallengeStat(challengeId);
-        
+
         boolean comparison = result.equals(c);
-        
+
         assertNotNull(result);
         assertTrue(comparison);
 
@@ -233,7 +233,7 @@ public class ChallengeStatTest {
     public void allChallengeStatsTest() {
         LazyList<ChallengeStat> allcs1 = (LazyList<ChallengeStat>) ChallengeStat.allChallengeStats();
         LazyList<ChallengeStat> allcs2 = ChallengeStat.findAll();
-        
+
         int length1 = allcs1.size();
         int length2 = allcs2.size();
 
@@ -256,7 +256,7 @@ public class ChallengeStatTest {
         Challenge testChallenge5 = Challenge.findFirst("title = ?", "testChallenge5");
         int challengeId5 = testChallenge5.getInteger("id");
 
-        ArrayList<ChallengeStat> topCS = ChallengeStat.topFive();
+        ArrayList<ChallengeStat> topCS = (ArrayList<ChallengeStat>) ChallengeStat.topFive();
 
         boolean result1 = ChallengeStat.getChallengeStat(challengeId1).equals(topCS.get(0));
         boolean result2 = ChallengeStat.getChallengeStat(challengeId2).equals(topCS.get(1));
