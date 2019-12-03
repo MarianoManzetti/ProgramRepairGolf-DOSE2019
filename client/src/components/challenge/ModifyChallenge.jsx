@@ -1,28 +1,23 @@
 import React , {Component} from 'react'
 import {Button, ButtonGroup} from 'reactstrap'
-import { connect } from 'react-redux'
-import { fetchUnsolvedCompilationChallenge} from '../../actions/compilationChallengeActions'
-import { fetchUnsolvedTestChallenge} from '../../actions/testChallengeActions'
-import TableCompilationChallengeModify from'./TableCompilationChallengeModify'
-import TableTestChallengeModify from './TableTestChallengeModify'
+import ListCompilationChallengeModify from'./ListCompilationChallengeModify'
+import ListTestChallengeModify from './ListTestChallengeModify'
 
 class ModifyChallenge extends Component {
 
-  state = {
-    opc: ""
-  }
+  constructor() {
+    super();
 
-  componentDidMount() {
-    this.props.fetchUnsolvedCompilationChallenge();
-    this.props.fetchUnsolvedTestChallenge();
+    this.state = {
+        opc: ""
+    }
   }
 
   show(){
     if (this.state.opc === "unsolvedCompilation"){
       return (
         <div className="container">
-          <p>unsolved compilation challenge</p>
-          <TableCompilationChallengeModify
+          <ListCompilationChallengeModify
             listCompilationChallenge={this.props.unsolvedCompilationChallenge}
           />
         </div>
@@ -31,10 +26,9 @@ class ModifyChallenge extends Component {
     else if (this.state.opc==="unsolvedTest"){
         return (
             <div className="container">
-            <p>unsolved test challenge</p>
-          <TableTestChallengeModify
-            listTestChallenge={this.props.unsolvedTestChallenge}
-          />
+              <ListTestChallengeModify
+                listTestChallenge={this.props.unsolvedTestChallenge}
+              />
           </div>
         );
       }
@@ -63,23 +57,4 @@ class ModifyChallenge extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    unsolvedCompilationChallenge: state.unsolvedCompilationChallenge.data,
-    unsolvedTestChallenge: state.unsolvedTestChallenge.data,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-    fetchUnsolvedCompilationChallenge: () => {
-      dispatch(fetchUnsolvedCompilationChallenge())
-    },
-    fetchUnsolvedTestChallenge: () => {
-      dispatch(fetchUnsolvedTestChallenge())
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModifyChallenge)
+export default ModifyChallenge

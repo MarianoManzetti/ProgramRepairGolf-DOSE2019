@@ -1,27 +1,28 @@
 import {
-    FETCH_RESOLVED_COMPILATION_CHALLENGE_REQUEST,
-    FETCH_RESOLVED_COMPILATION_CHALLENGE_SUCCESS,
-    FETCH_RESOLVED_COMPILATION_CHALLENGE_FAILURE,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_REQUEST,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_SUCCESS,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_FAILURE,
     DELETE_CHALLENGE
 } from '../../constants/ActionTypesChallenges'
 
-const initCompilationChallengeState = {
+const initChallengeState = {
     data: [],
     loading: false,
     error: ''
 }
 
-const resolvedCompilationChallengeReducer = (state = initCompilationChallengeState, action) => {
 
+const challengesAssociatedToUserReducer = (state = initChallengeState, action) => {
+    
     switch(action.type) {
 
-        case FETCH_RESOLVED_COMPILATION_CHALLENGE_REQUEST:
+        case FETCH_CHALLENGES_ASSOCIATED_TO_USER_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case FETCH_RESOLVED_COMPILATION_CHALLENGE_SUCCESS:
+        case FETCH_CHALLENGES_ASSOCIATED_TO_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -29,14 +30,14 @@ const resolvedCompilationChallengeReducer = (state = initCompilationChallengeSta
                 error: ''
             }
 
-        case FETCH_RESOLVED_COMPILATION_CHALLENGE_FAILURE:
+        case FETCH_CHALLENGES_ASSOCIATED_TO_USER_FAILURE:
             return {
                 ...state,
                 loading: false,
                 data: [],
                 error: action.payload,
             }
-        
+
         case DELETE_CHALLENGE:
             return {
                 ...state,
@@ -50,4 +51,4 @@ const resolvedCompilationChallengeReducer = (state = initCompilationChallengeSta
 
 }
 
-export default resolvedCompilationChallengeReducer;
+export default challengesAssociatedToUserReducer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import IndividualStats from './IndividualStats';
-import logo from '../../logo.svg';
+import ReactLoading from 'react-loading';
 import { fetchRanking } from '../../actions/UserStatActions';
 import { fetchIndividualUserStats } from '../../actions/UserStatActions';
 
@@ -13,7 +13,9 @@ class IndividualStatsContainer extends Component {
 
 	render() {
 		return this.props.loading ? (
-      <img src={logo} className="App-logo" alt="logo" />
+			<div>
+      	<center><ReactLoading type="bars" color="#e83737" height={50} width={200}  /></center>
+			</div>
 		) : (
 			<IndividualStats
 				stats={this.props.individual_stats}
