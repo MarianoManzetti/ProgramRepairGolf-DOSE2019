@@ -77,7 +77,7 @@ class ViewChallenge extends Component {
         return (
             <div className="container">
             <p>unsolved test challenge</p>
-          <TableTestChallenge
+          <ListTestChallenge
             listTestChallenge={this.props.unsolvedTestChallenge}
             showStatsHandler = {(id) => () => {
               this.props.history.push({
@@ -92,7 +92,7 @@ class ViewChallenge extends Component {
         return (
             <div className="container">
             <p>resolved test challenge</p>
-          <TableTestChallenge
+          <ListTestChallenge
             listTestChallenge={this.props.resolvedTestChallenge}
             showStatsHandler = {(id) => () => {
               this.props.history.push({
