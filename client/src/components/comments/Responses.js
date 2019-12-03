@@ -19,7 +19,7 @@ const Responses = ({ responses, id, user_id, deleteResponse }) => {
             <p>description: { res.description }</p>
             {user_id === res.user_id ?(
                 <div>
-                  <button onClick={()=>deleteResponse(res.id)}> Delete </button>
+                  <button className= "button-submit" onClick={()=>deleteResponse(res.id)}> Delete </button>
                 </div>
             ):(
                 <div>
