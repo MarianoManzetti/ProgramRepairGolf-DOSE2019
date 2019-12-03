@@ -67,8 +67,12 @@ const fetchDeleteFailure = error => {
 export const fetchDeleteComment = (id) =>{
   return function(dispatch) {
     dispatch(fetchDeleteCommentRequest())
+    let base64 = require('base-64');
+    const username = localStorage.getItem("username");
+    const password = localStorage.getItem("password");
+    const token= base64.encode(username+":"+password);
      axios.delete(process.env.REACT_APP_API_HOST+'/comments/deleteComment/'+id,{
-        headers: {'Authorization' : 'Basic '+ localStorage.getItem("token")},
+        headers: {'Authorization' : 'Basic '+ token},
         data:{
           id:id
         }
@@ -91,7 +95,10 @@ export const fetchDeleteComment = (id) =>{
 export const fetchCommentsUsers = (id) => {
   return function(dispatch, getState) {
       dispatch(fetchCommentsRequest())
-      const token = localStorage.getItem('token');
+      let base64 = require('base-64');
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+      const token= base64.encode(username+":"+password);
        axios.get(process.env.REACT_APP_API_HOST+'/comments/users/'+id, {
         headers: {'Authorization' : 'Basic '+ token},
       })
@@ -113,7 +120,10 @@ export const fetchCommentsUsers = (id) => {
 export const fetchAddComment = (state) => {
   return function(dispatch, getState) {
       dispatch(fetchCommentsRequest())
-      const token = localStorage.getItem('token');
+      let base64 = require('base-64');
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+      const token= base64.encode(username+":"+password);
        axios.post(process.env.REACT_APP_API_HOST+'/comments/createComment',{
          title: state.title,
          description: state.description,
@@ -136,7 +146,10 @@ export const fetchAddComment = (state) => {
 export const fetchCommentsChallenge = (id) => {
   return function(dispatch, getState) {
       dispatch(fetchCommentsRequest())
-      const token = localStorage.getItem('token');
+      let base64 = require('base-64');
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+      const token= base64.encode(username+":"+password);
        axios.get(process.env.REACT_APP_API_HOST+'/comments/challenges/'+id, {
          headers: {'Authorization' : 'Basic '+ token},
       })
