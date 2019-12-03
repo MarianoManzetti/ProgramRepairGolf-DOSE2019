@@ -1,4 +1,5 @@
 import axios from 'axios';
+import base64 from 'base-64'
 import {
     ADD_COMPILATION_CHALLENGE,
     MODIFY_COMPILATION_CHALLENGE,
@@ -7,7 +8,10 @@ import {
     DELETE_CHALLENGE,
     FETCH_DATA_REQUEST,
     FETCH_DATA_SUCCESS,
-    FETCH_DATA_FAILURE
+    FETCH_DATA_FAILURE,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_REQUEST,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_SUCCESS,
+    FETCH_CHALLENGES_ASSOCIATED_TO_USER_FAILURE
 } from '../constants/ActionTypesChallenges'
 
 export const cretateCompilationChallenge = (challenge) => {
@@ -45,7 +49,6 @@ export const deleteChallenge = (id) => {
   }
 }
 
-
 const fetchDataRequest = () => {
     return {
       type: FETCH_DATA_REQUEST
@@ -69,9 +72,9 @@ const fetchDataFailure = error => {
 export const addCompilationChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
+        dispatch(fetchDataRequest(state))
         let base64 = require('base-64');
         let username = getState().user.currentUser.username;
-        dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/compilationChallenge/create', null, {
             params:{
                 userId: userid,
@@ -88,9 +91,15 @@ export const addCompilationChallenge = (state) => {
         })
         .then( res => {
             dispatch(fetchDataSucess(res.data))
+            if (res.data === true) {
+                alert("Challenge loader correctly!");
+            } else {
+                alert("Could not load challenge, validation failure!");
+            }
         })
         .catch( error => {
             dispatch(fetchDataFailure(error.message))
+            alert("ERROR! Verify the data entered, title or class name already exist!")
         })
     }
 }
@@ -98,7 +107,6 @@ export const addCompilationChallenge = (state) => {
 export const addTestChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/testChallenge/create', null, {
@@ -118,18 +126,24 @@ export const addTestChallenge = (state) => {
         })
         .then( res => {
             dispatch(fetchDataSucess(res.data))
+            if (res.data === true) {
+                alert("Challenge loader correctly!");
+            } else {
+                alert("Could not load challenge, validation failure!");
+            }
         })
         .catch( error => {
             dispatch(fetchDataFailure(error.message))
+            alert("ERROR! Verify the data entered, title or class name already exist!")
         })
     }
 }
 
 export const executeDeleteChallenge = (id) => {
-    return function(dispatch,getState) {
+    return function(dispatch, getState) {
+        dispatch(deleteChallenge(id))
         let base64 = require('base-64');
         let username = getState().user.currentUser.username;
-        dispatch(fetchDataRequest())
         axios.delete('http://localhost:55555/challenge/' + id , {
             headers: {
                 Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
@@ -188,3 +202,43 @@ export const executeDeleteChallenge = (id) => {
 //         })
 //     }
 // }
+
+const fetchChallengesAssociatedToUserRequest = () => {
+    return {
+      type: FETCH_CHALLENGES_ASSOCIATED_TO_USER_REQUEST
+    }
+}
+
+const fetchChallengesAssociatedToUserSucess = data => {
+    return {
+        type: FETCH_CHALLENGES_ASSOCIATED_TO_USER_SUCCESS,
+        payload: data
+    }
+}
+
+const fetchChallengesAssociatedToUserFailure = error => {
+    return {
+        type: FETCH_CHALLENGES_ASSOCIATED_TO_USER_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchChallengesAssociatedToUser = () => {
+    return function(dispatch, getState) {
+        let base64 = require('base-64');
+        let username = getState().user.currentUser.username;
+        let userid = getState().user.currentUser.id;
+        dispatch(fetchChallengesAssociatedToUserRequest())
+        axios.get('http://localhost:55555/challenge/user/' + userid , {
+            headers: {
+                Authorization: "Basic" + base64.encode(username + ":" +localStorage.getItem("password"))
+            }
+        })
+        .then( res => {
+            dispatch(fetchChallengesAssociatedToUserSucess(res.data))
+        })
+        .catch( error => {
+            dispatch(fetchChallengesAssociatedToUserFailure(error.message))
+        })
+    }
+}

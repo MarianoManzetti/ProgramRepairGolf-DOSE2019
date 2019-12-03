@@ -1,4 +1,5 @@
 import axios from 'axios'
+import base64 from 'base-64'
 import {
   FETCH_PROPOSITIONS_REQUEST,
   FETCH_PROPOSITIONS_SUCCESS,
@@ -30,7 +31,6 @@ export const fetchPropositionsGame = (idUsr, idChallenge) => {
   return async function(dispatch, getState) {
     if (getState().propositions.data.length === 0) {
       dispatch(fetchPropositionsRequest())
-      let base64 = require("base-64");
       let username = getState().user.currentUser.username;
       axios.post('http://localhost:55555/users/'+idUsr+'/challenge/'+idChallenge+'/propsitions', null, {
         headers: {
@@ -47,5 +47,3 @@ export const fetchPropositionsGame = (idUsr, idChallenge) => {
     }
   }
 }
-
-

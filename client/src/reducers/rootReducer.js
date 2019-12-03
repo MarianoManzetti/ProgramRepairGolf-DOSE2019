@@ -10,6 +10,7 @@ import unsolvedCompilationChallengeReducer from './challenge/unsolvedCompilation
 import allTestChallengeReducer from './challenge/allTestChallengeReducer'
 import resolvedTestChallengeReducer from './challenge/resolvedTestChallengeReducer'
 import unsolvedTestChallengeReducer from './challenge/unsolvedTestChallengeReducer'
+import challengesAssociatedToUserReducer from './challenge/challengesAssociatedToUserReducer'
 import challengeReducer from './challenge/challengeReducer'
 import commentsReducer from './comment/commentsReducer'
 import responsesReducer from './comment/responsesReducer'
@@ -59,7 +60,8 @@ const rootReducer = combineReducers({
     allTestChallenge: allTestChallengeReducer,
     resolvedTestChallenge: resolvedTestChallengeReducer,
     unsolvedTestChallenge: unsolvedTestChallengeReducer,
-    challenge: challengeReducer,
+    challengesAssociatedToUser: challengesAssociatedToUserReducer,
+    validationChallenge: challengeReducer,
     comments: commentsReducer,
     responses: responsesReducer,
     users: usersReducer,
