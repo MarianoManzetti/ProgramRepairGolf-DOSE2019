@@ -137,7 +137,7 @@ public class ChallengeStat extends Model implements Comparable {
         ArrayList<ChallengeStat> topF;
         try {
             //sublist of sortered challenge stats
-            topF = new ArrayList<ChallengeStat>(allCS.subList(0, 4));
+            topF = new ArrayList<ChallengeStat>(allCS.subList(0, 5));
         } catch(IndexOutOfBoundsException e) {
             System.out.println("There is no enough challenges to make a top five list");
             topF = new ArrayList<ChallengeStat>(allCS.subList(0, allCS.size()));
