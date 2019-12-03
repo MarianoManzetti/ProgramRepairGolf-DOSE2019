@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchChallengeStat }  from '../../actions/challengeStatActions/challengeStatActions';
+import './Style.css';
 
 class ChallengeStat extends Component {
 
@@ -25,7 +26,7 @@ class ChallengeStat extends Component {
           <h3>Challenge id: {challengeStat.challenge_id}</h3>
           <h3>Average score: {challengeStat.average_score}</h3>
           <h3>Solved count: {challengeStat.solved_count}</h3>
-          <button onClick={this.goBack}> Back </button>
+          <button class = "button" onClick={this.goBack}> Back </button>
 
         </div>
       ) : (

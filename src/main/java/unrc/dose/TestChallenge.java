@@ -111,11 +111,15 @@ public class TestChallenge extends Model {
             source,
             point,
             ownerSolutionId);
-            TestChallenge t = new TestChallenge();
-            t.setChallengeId(c.getInteger("id"));
-            t.setTest(test);
-            t.saveIt();
-        return (TestChallenge.validateTestChallenge(t));
+        TestChallenge t = new TestChallenge();
+        t.setChallengeId(c.getInteger("id"));
+        t.setTest(test);
+        t.saveIt();
+        boolean validation = TestChallenge.validateTestChallenge(t);
+        if (!validation) {
+            c.deleteCascade();
+        }
+        return validation;
     }
 
     /**

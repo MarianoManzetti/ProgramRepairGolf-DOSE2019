@@ -1,4 +1,5 @@
 import axios from 'axios'
+import base64 from 'base-64'
 import {
     FETCH_ALL_COMPILATION_CHALLENGE_REQUEST,
     FETCH_ALL_COMPILATION_CHALLENGE_SUCCESS,
@@ -34,7 +35,6 @@ const fetchAllCompilationChallengeFailure = error => {
 export const fetchAllCompilationChallenge = () => {
     return function(dispatch,getState) {
         dispatch(fetchAllCompilationChallengeRequest())
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/all', {
@@ -74,7 +74,6 @@ const fetchResolvedCompilationChallengeFailure = error => {
 export const fetchResolvedCompilationChallenge = () => {
     return function(dispatch,getState) {
         dispatch(fetchResolvedCompilationChallengeRequest())
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/resolved', {
@@ -114,7 +113,6 @@ const fetchUnsolvedCompilationChallengeFailure = error => {
 export const fetchUnsolvedCompilationChallenge = () => {
     return function(dispatch,getState) {
         dispatch(fetchUnsolvedCompilationChallengeRequest())
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
 
         axios.get('http://localhost:55555/compilationChallenge/unsolved', {

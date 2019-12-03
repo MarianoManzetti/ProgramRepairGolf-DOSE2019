@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Comments from './Comments';
-import logo from '../../logo.svg';
+import ReactLoading from 'react-loading';
 import { fetchCommentsChallenge } from '../../actions/comment/commentsActions';
 import { fetchAddComment } from '../../actions/comment/commentsActions';
 import AddComment from './AddComment';
@@ -26,7 +26,9 @@ class CommentContainerChallenge extends Component {
 	render(){
     const press= this.state.press;
 		return this.props.loading ? (
-      <img src={logo} className="App-logo" alt="logo" />
+      <div>
+      	<center><ReactLoading type="bars" color="#e83737" height={50} width={200}  /></center>
+			</div>
 		) : (
       <div>
       <div>

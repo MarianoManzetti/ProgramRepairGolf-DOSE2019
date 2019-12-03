@@ -1,43 +1,37 @@
 import React , {Component} from 'react'
 import {Button, ButtonGroup} from 'reactstrap'
 import { connect } from 'react-redux'
-import {fetchAllCompilationChallenge} from '../../actions/compilationChallengeActions'
-import {fetchAllTestChallenge} from '../../actions/testChallengeActions'
-import {
-  executeDeleteChallenge
-}  from '../../actions/challengeActions';
-import TableTestChallengeDelete from './TableTestChallengeDelete'
-import TableCompilationChallengeDelete from './TableCompilationChallengeDelete'
+import {executeDeleteChallenge}  from '../../actions/challengeActions';
+import ListTestChallengeDelete from './ListTestChallengeDelete'
+import ListCompilationChallengeDelete from './ListCompilationChallengeDelete';
 
 
 class DeleteChallenge extends Component {
 
-  state = {
-    opc: ""
-  }
+  constructor() {
+    super();
 
-  componentDidMount() {
-    this.props.fetchAllCompilationChallenge();
-    this.props.fetchAllTestChallenge();
+    this.state = {
+        opc: ""
+    }
   }
 
   show(){
     if (this.state.opc === "allCompilation") {
       return (
-        <div className="container">
-            <p>all compilation challenge</p>
-            <TableCompilationChallengeDelete
+       <div className="container">
+            <ListCompilationChallengeDelete
               listCompilationChallenge={this.props.allCompilationChallenge}
               executeDeleteChallenge={this.props.executeDeleteChallenge}
             />
+            
         </div>
       );
     }
     else if (this.state.opc==="allTest"){
       return (
         <div className="container">
-          <p>all test challenge</p>
-          <TableTestChallengeDelete
+          <ListTestChallengeDelete
             listTestChallenge={this.props.allTestChallenge}
             executeDeleteChallenge={this.props.executeDeleteChallenge}
           />
@@ -77,22 +71,14 @@ class DeleteChallenge extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {
-    allCompilationChallenge: state.allCompilationChallenge.data,
-    allTestChallenge: state.allTestChallenge.data,
-    challenge: state.challenge.data
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllCompilationChallenge: () => {
-      dispatch(fetchAllCompilationChallenge())
-    },
-    fetchAllTestChallenge: () => {
-      dispatch(fetchAllTestChallenge())
-    },
     executeDeleteChallenge: (id) => {
       dispatch(executeDeleteChallenge(id))
     }

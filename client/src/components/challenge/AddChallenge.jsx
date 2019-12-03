@@ -47,15 +47,25 @@ class AddChallenge extends Component {
   }
 
   formTest(){
+    const aux = "{";
       return (
         <div className="block-margin">
             <label htmlFor="test">test:</label>
+            <p>The class name should be the one entered above plus the word Test</p>
+            <p>*Source methods must be static*</p>
+            <p>For example if the class name is Hello:</p>
+            <p>package src.test;</p>
+            <p>import src.main.Hello;</p>
+            <p>import org.junit. *;</p>
+            <p>public class HelloTest {aux}</p>
+            <p>}</p>
             <textarea className="input-text2" rows="100" cols="100" type="text" id="test" onChange={this.handleChange} />
         </div>
       );
   }
 
   formCompilation(){
+    const aux = "{";
     return (
       <div>
         <div className="block-margin">
@@ -72,11 +82,16 @@ class AddChallenge extends Component {
         </div>
         <div className="block-margin">
           <label htmlFor="source">source:</label>
+          <p>The class name must be the one entered previously </p>
+          <p>For example if the class name is Hello: </p>
+          <p>package src.main;</p>
+          <p>public class Hello {aux}</p>
+          <p>}</p>
           <textarea className="input-text2" rows="100" cols="100" type="text" id="source" onChange={this.handleChange} />
         </div>
         <div className="block-margin">
           <label htmlFor="point">points:</label>
-          <input className="input-text" type="text" id="point" onChange={this.handleChange} />
+          <input className="input-text" type="number" id="point" onChange={this.handleChange} />
         </div>
     </div>
     );
@@ -129,6 +144,13 @@ class AddChallenge extends Component {
       <div className="container">
         <form onSubmit={this.handleSubmit} >
           <div className="block-button"> <h1> Load the challenge </h1> </div>
+          <p>CLARIFICATION:</p>
+          <p>
+            _The validation for compilation challenges is that the source code should not compile, otherwise the challenge cannot be loaded.
+          </p>
+          <p>
+            _The validation for the test challenges is that the source code must compile and also must pass the tests, otherwise the challenge cannot be loaded.
+          </p>
           <p> Select of the type challenge </p>
           <Select 
             placeholder = {this.state.typeChallenge}        
@@ -145,7 +167,7 @@ class AddChallenge extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    challenge: state.data
+    validationChallenge: state.data
   }
 }
 

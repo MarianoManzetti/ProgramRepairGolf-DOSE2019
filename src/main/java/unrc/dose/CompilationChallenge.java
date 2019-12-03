@@ -79,8 +79,14 @@ public class CompilationChallenge extends Model {
             ownerSolutionId);
         CompilationChallenge t = new CompilationChallenge();
         t.setChallengeId(c.getInteger("id"));
-        t.saveIt();
-        return (CompilationChallenge.validateCompilationChallenge(c));
+        boolean validation =
+        CompilationChallenge.validateCompilationChallenge(c);
+        if (validation) {
+            t.saveIt();
+        } else {
+            c.deleteCascade();
+        }
+        return validation;
     }
 
     /**

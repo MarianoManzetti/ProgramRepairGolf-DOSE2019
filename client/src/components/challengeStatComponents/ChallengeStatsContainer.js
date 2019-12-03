@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ChallengeStats from './ChallengeStats';
-import logo from '../../logo.svg';
+import ReactLoading from 'react-loading';
 import { fetchChallengeStats }  from '../../actions/challengeStatActions/challengeStatActions';
 
 class ChallengeStatsContainer extends Component {
@@ -11,7 +11,9 @@ class ChallengeStatsContainer extends Component {
 
 	render() {
 		return this.props.loading ? (
-      <img src={logo} className="App-logo" alt="logo" />
+			<div>
+				<center><ReactLoading type="bars" color="#e83737" height={50} width={200}  /></center>
+			</div>
 		) : (
 			<ChallengeStats
 				challengeStats={this.props.challengeStats}
