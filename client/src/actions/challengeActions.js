@@ -1,4 +1,5 @@
 import axios from 'axios';
+import base64 from 'base-64'
 import {
     ADD_COMPILATION_CHALLENGE,
     MODIFY_COMPILATION_CHALLENGE,
@@ -69,7 +70,6 @@ const fetchDataFailure = error => {
 export const addCompilationChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/compilationChallenge/create', null, {
@@ -98,7 +98,6 @@ export const addCompilationChallenge = (state) => {
 export const addTestChallenge = (state) => {
     return function(dispatch, getState) {
         let userid = getState().user.currentUser.id;
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.post('http://localhost:55555/testChallenge/create', null, {
@@ -127,7 +126,6 @@ export const addTestChallenge = (state) => {
 
 export const executeDeleteChallenge = (id) => {
     return function(dispatch,getState) {
-        let base64 = require('base-64');
         let username = getState().user.currentUser.username;
         dispatch(fetchDataRequest())
         axios.delete('http://localhost:55555/challenge/' + id , {

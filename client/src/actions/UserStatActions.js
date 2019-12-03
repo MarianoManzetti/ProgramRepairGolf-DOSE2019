@@ -1,4 +1,5 @@
 import axios from 'axios';
+import base64 from 'base-64'
 import {
   FETCH_RANKING_REQUEST,
   FETCH_RANKING_SUCCESS,
@@ -32,7 +33,6 @@ const fetchRankingFailure = error => {
 export const fetchRanking = () => {
   return function(dispatch, getState) {
       dispatch(fetchRankingRequest())
-      let base64 = require('base-64');
       let username = getState().user.currentUser.username;
       axios.get('http://localhost:55555/userstats/ranking?number=20',
       {headers:{ Authorization: "Basic " + base64.encode(username + ":" +localStorage.getItem("password"))}})
@@ -69,7 +69,6 @@ export const fetchRanking = () => {
   export const fetchIndividualUserStats = () => {
     return function(dispatch, getState){
       dispatch(fetchIndividualStatsRequest())
-      let base64 = require('base-64');
       let userid = getState().user.currentUser.id;
       let username = getState().user.currentUser.username;
       axios.get('http://localhost:55555/userstats?id='+userid,
