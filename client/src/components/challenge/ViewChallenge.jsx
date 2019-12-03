@@ -75,31 +75,31 @@ class ViewChallenge extends Component {
     }
     else if (this.state.opc==="unsolvedTest"){
         return (
-          <div className="container">
-
-            <ListTestChallenge
-              listTestChallenge={this.props.unsolvedTestChallenge}
-              showStatsHandler = {(id) => () => {
-                this.props.history.push({
-                  pathname: '/challenges/' + id + '/stats',
-                })
-              }}
-            />
+            <div className="container">
+            <p>unsolved test challenge</p>
+          <TableTestChallenge
+            listTestChallenge={this.props.unsolvedTestChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
+          />
           </div>
         );
       }
     else if (this.state.opc==="resolvedTest"){
         return (
             <div className="container">
-
-              <ListTestChallenge
-                listTestChallenge={this.props.resolvedTestChallenge}
-                showStatsHandler = {(id) => () => {
-                  this.props.history.push({
-                    pathname: '/challenges/' + id + '/stats',
-                  })
-                }}
-              />
+            <p>resolved test challenge</p>
+          <TableTestChallenge
+            listTestChallenge={this.props.resolvedTestChallenge}
+            showStatsHandler = {(id) => () => {
+              this.props.history.push({
+                pathname: '/challenges/' + id + '/stats',
+              })
+            }}
+          />
           </div>
         );
       }
