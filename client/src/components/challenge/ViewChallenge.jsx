@@ -75,18 +75,6 @@ class ViewChallenge extends Component {
     }
     else if (this.state.opc==="unsolvedTest"){
         return (
-<<<<<<< HEAD
-            <div className="container">
-            <p>unsolved test challenge</p>
-          <TableTestChallenge
-            listTestChallenge={this.props.unsolvedTestChallenge}
-            showStatsHandler = {(id) => () => {
-              this.props.history.push({
-                pathname: '/challenges/' + id + '/stats',
-              })
-            }}
-          />
-=======
           <div className="container">
 
             <ListTestChallenge
@@ -97,25 +85,13 @@ class ViewChallenge extends Component {
                 })
               }}
             />
->>>>>>> dba0a28c1036e16272a9bc966f5050af8e7effa3
           </div>
         );
       }
     else if (this.state.opc==="resolvedTest"){
         return (
             <div className="container">
-<<<<<<< HEAD
-            <p>resolved test challenge</p>
-          <TableTestChallenge
-            listTestChallenge={this.props.resolvedTestChallenge}
-            showStatsHandler = {(id) => () => {
-              this.props.history.push({
-                pathname: '/challenges/' + id + '/stats',
-              })
-            }}
-          />
-=======
-  
+
               <ListTestChallenge
                 listTestChallenge={this.props.resolvedTestChallenge}
                 showStatsHandler = {(id) => () => {
@@ -124,7 +100,6 @@ class ViewChallenge extends Component {
                   })
                 }}
               />
->>>>>>> dba0a28c1036e16272a9bc966f5050af8e7effa3
           </div>
         );
       }
@@ -159,8 +134,8 @@ class ViewChallenge extends Component {
           <ButtonGroup>
             <Button className="button-group" onClick={() => this.setState({opc:"allCompilation"})}>all compilation challenge</Button>
             <Button className="button-group" onClick={() => this.setState({opc:"unsolvedCompilation"})}>unsolved compilation challenge</Button>
-            <Button className="button-group" onClick={() => this.setState({opc:"resolvedCompilation"})}>resolved compilation challenge</Button> 
-            <Button className="button-group" onClick={() => this.setState({opc:"allTest"})}>all test challenge</Button> 
+            <Button className="button-group" onClick={() => this.setState({opc:"resolvedCompilation"})}>resolved compilation challenge</Button>
+            <Button className="button-group" onClick={() => this.setState({opc:"allTest"})}>all test challenge</Button>
             <Button className="button-group" onClick={() => this.setState({opc:"unsolvedTest"})}>unsolved test challenge</Button>
             <Button className="button-group" onClick={() => this.setState({opc:"resolvedTest"})}>resolved test challenge</Button>
             <Button className="button-group" onClick={() => this.setState({opc:"challengesAssociatedToUser"})}>created by you</Button>
