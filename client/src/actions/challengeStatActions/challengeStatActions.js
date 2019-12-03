@@ -1,4 +1,5 @@
 import axios from 'axios';
+import base64 from 'base-64'
 import {
     ADD_CHALLENGESTAT,
     DELETE_CHALLENGESTAT,
@@ -6,9 +7,9 @@ import {
     FETCH_CHALLENGESTAT_REQUEST,
     FETCH_CHALLENGESTAT_SUCCESS,
     FETCH_CHALLENGESTAT_FAILURE,
-    FETCH_CHALLENGESTATS_REQUEST,
-    FETCH_CHALLENGESTATS_SUCCESS,
-    FETCH_CHALLENGESTATS_FAILURE
+    FETCH_TOPCHALLENGESTATS_REQUEST,
+    FETCH_TOPCHALLENGESTATS_SUCCESS,
+    FETCH_TOPCHALLENGESTATS_FAILURE
 } from '../../constants/challengeStatConstants/ActionTypes'
 
 import Authorization from '../../components/Authorization';
@@ -28,44 +29,44 @@ export const deleteChallengeStat = (challenge_id) => {
   }
 }
 
-const fetchChallengeStatsRequest = () => {
+const fetchTopChallengeStatsRequest = () => {
   return {
-    type: FETCH_CHALLENGESTATS_REQUEST
+    type: FETCH_TOPCHALLENGESTATS_REQUEST
   }
 }
 
-const fetchChallengeStatsSucess = challengeStats => {
+const fetchTopChallengeStatsSucess = topChallengeStats => {
     return {
-        type: FETCH_CHALLENGESTATS_SUCCESS,
-        payload: challengeStats
+        type: FETCH_TOPCHALLENGESTATS_SUCCESS,
+        payload: topChallengeStats
     }
 }
 
-const fetchChallengeStatsFailure = error => {
+const fetchTopChallengeStatsFailure = error => {
     return {
-        type: FETCH_CHALLENGESTATS_FAILURE,
+        type: FETCH_TOPCHALLENGESTATS_FAILURE,
         payload: error
     }
 }
 
-export const fetchChallengeStats = () => {
-  return function(dispatch, getState) {
-    if (getState().challengeStats.data.length === 0) {
-      dispatch(fetchChallengeStatsRequest())
+export const fetchTopChallengeStats = () => {
+    return function(dispatch, getState) {
+        dispatch(fetchTopChallengeStatsRequest())
 
-      axios.get('http://localhost:55555/challengestat/all', {
-      header: {
-        Authorization: "Basic" + localStorage.getItem("token") }
-      })
+        axios.get('http://localhost:55555/challengestat/top', {
+            headers: {
+                Authorization: "Basic" + localStorage.getItem("token")
+            }
+        })
         .then( res =>{
-          dispatch(fetchChallengeStatsSucess(res.data))
+            dispatch(fetchTopChallengeStatsSucess(res.data))
         })
         .catch(error => {
-          dispatch(fetchChallengeStatsFailure(error.message))
+          dispatch(fetchTopChallengeStatsFailure(error.message))
         })
     }
-  }
 }
+
 
 
 const fetchChallengeStatRequest = () => {
@@ -89,18 +90,19 @@ const fetchChallengeStatFailure = error => {
 }
 
 export const fetchChallengeStat = (challenge_id) => {
-  return function(dispatch) {
-    dispatch(fetchChallengeStatRequest())
+    return function(dispatch) {
+        dispatch(fetchChallengeStatRequest())
 
-    axios.get('http://localhost:55555/challengestat/get/' + challenge_id, {
-    headers: {
-      Authorization: "Basic" + localStorage.getItem("token") }
-    })
-      .then( res =>{
-        dispatch(fetchChallengeStatSucess(res.data))
-      })
-      .catch( error => {
-        dispatch(fetchChallengeStatFailure(error.message))
-      })
-  }
+        axios.get('http://localhost:55555/challengestat/get/' + challenge_id, {
+            headers: {
+                Authorization: "Basic" + localStorage.getItem("token")
+            }
+        })
+        .then( res =>{
+            dispatch(fetchChallengeStatSucess(res.data))
+        })
+        .catch( error => {
+            dispatch(fetchChallengeStatFailure(error.message))
+        })
+    }
 }
