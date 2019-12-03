@@ -23,12 +23,15 @@ class Comments extends Component{
       const responses= this.props.responses;
       return comments.map(comment =>
           <div className="comment card" key={comment.id}>
+              <h1>Comentarios</h1>
+              
               <Comment comment={comment}/>
-
-              <Link to={"/responses/"+comment.id}> Reply </Link>
+              
+              <Link className= "button-submit" to={"/responses/"+comment.id}> Reply </Link>
+              
               {currentuser_id === comment.user_id ?(
                 <div>
-                  <button onClick={this.handleDeleteClick(comment.id)}> Delete </button>
+                  <button className= "button-submit" onClick={this.handleDeleteClick(comment.id)}> Delete </button>
                 </div>
               ):(
                 <div>
@@ -36,7 +39,7 @@ class Comments extends Component{
               )}
              { comment.responses ?(
                 <div>
-                  <Link to={{pathname:'/responses/'+ comment.id, state:{c:comment}}}> Show responses </Link>
+                  <Link className= "button-submit" to={{pathname:'/responses/'+ comment.id, state:{c:comment}}}> Show responses </Link>
                 </div>
               ):(
                 <div>

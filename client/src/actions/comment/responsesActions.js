@@ -66,7 +66,10 @@ const fetchDeleteFailure = error => {
 export const fetchResponses = (id) => {
   return function(dispatch, getState) {
       dispatch(fetchResponsesRequest())
-      const token = localStorage.getItem('token');
+      let base64 = require('base-64');
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+      const token= base64.encode(username+":"+password);
        axios.get(process.env.REACT_APP_API_HOST+'/comments/responses/'+id, {
         headers: {'Authorization' : 'Basic '+ token},
       })
@@ -88,7 +91,10 @@ export const fetchResponses = (id) => {
 export const fetchAddResponse = (state) => {
   return function(dispatch, getState) {
       dispatch(fetchResponsesRequest())
-      const token = localStorage.getItem('token');
+      let base64 = require('base-64');
+      const username = localStorage.getItem("username");
+      const password = localStorage.getItem("password");
+      const token= base64.encode(username+":"+password);
        axios.post(process.env.REACT_APP_API_HOST+'/comments/createResponse',{
          description: state.description,
          userId: state.user_id,
@@ -112,8 +118,12 @@ export const fetchAddResponse = (state) => {
 export const fetchDeleteResponse = (id) =>{
   return function(dispatch) {
     dispatch(fetchDeleteResponseRequest())
+    let base64 = require('base-64');
+    const username = localStorage.getItem("username");
+    const password = localStorage.getItem("password");
+    const token= base64.encode(username+":"+password);
      axios.delete(process.env.REACT_APP_API_HOST+'/comments/deleteComment/'+id,{
-        headers: {'Authorization' : 'Basic '+ localStorage.getItem("token")},
+        headers: {'Authorization' : 'Basic '+ token},
         data:{
           id:id
         }

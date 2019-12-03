@@ -8,7 +8,7 @@ import { fetchDeleteComment } from '../../actions/comment/commentsActions';
 class CommentContainerUser extends Component {
 
 	componentDidMount() {
-		this.props.fetchCommentsUsers(this.props.user)
+		this.props.fetchCommentsUsers(this.props.currentUser_id)
   }
 
 

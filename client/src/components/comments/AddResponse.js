@@ -27,7 +27,7 @@ render() {
         <label>
           <input type="text" placeholder="Description" id="description"  onChange={this.handleChange} />
         </label>
-          <button>Send Response</button>
+          <button className= "button-submit">Send Response</button>
         </form>
     </div>
   );
