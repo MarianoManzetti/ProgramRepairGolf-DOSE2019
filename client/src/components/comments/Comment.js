@@ -9,10 +9,9 @@ class Comment extends Component{
 
   return(
    <div className="card-content">
-      <p>{comment.username} :</p>
-      <p>title: { comment.title } </p>
-      <p>description: { comment.description }</p>
-
+      <h4>{comment.username} :</h4>
+      <h5>title: { comment.title } </h5>
+      <h5>description: { comment.description }</h5>
       </div>
   );
       }

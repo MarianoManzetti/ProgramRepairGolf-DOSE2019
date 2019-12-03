@@ -88,6 +88,21 @@ public final class ChallengeStatEndpoint implements Endpoint {
         )
 
         .get(
+            path("/top")
+                .withDescription("Will return the top 5 challenge stats")
+                .withResponseType(String.class),
+            (req, res) -> {
+                List<ChallengeStat> top =
+                ChallengeStat.topFive();
+                List<String> jsonList = new ArrayList<String>();
+                for (ChallengeStat cs: top) {
+                    jsonList.add(cs.toJson(true, "id", "challenge_id", "solved_count", "average_score"));
+                }
+                return jsonList;
+            }
+        )
+
+        .get(
             path("/get/:challengeId")
                 .withDescription("Will fetch challenge stat data")
                 .withPathParam()
