@@ -1,6 +1,6 @@
 .button-submit {
     padding: 15px 80px;
-    background-color: #C62828;
+    background-color: #F44336;
     color: white;
     border: 1px solid #000000;
     background-color: 250ms;
@@ -11,7 +11,7 @@
 .button-submit:hover {
     cursor: pointer;
     background-color: white;
-    color: #C62828;
+    color: #F44336;
 }
 .block-button {
     text-align: center;
@@ -42,7 +42,7 @@
     margin: 8px;
 }
 .button-group {
-    background-color: #C62828;
+    background-color: #F44336;
     color: white;
     border: 1px solid #000000;
     background-color: 250ms;
@@ -53,12 +53,12 @@
 .button-group:hover {
     cursor: pointer;
     background-color: white;
-    color: #C62828;
+    color: #F44336;
 }
 .button-table {
     padding: 5px 20px;
     background-color: white;
-    color: #C62828;
+    color: #F44336;
     border: 2px solid black;
     background-color: 250ms;
     border-radius: 2px;
@@ -68,6 +68,6 @@
 }
 .button-table:hover {
     cursor: pointer;
-    background-color: #C62828;
+    background-color: #F44336;
     color: white;
 }

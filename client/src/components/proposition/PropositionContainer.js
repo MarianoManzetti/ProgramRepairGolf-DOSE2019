@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Propositions from "./Propositions";
-import logo from "../../logo.svg";
+import ReactLoading from 'react-loading';
 import { fetchPropositionsGame } from "../../actions/proposition/propositionsActions";
 
 class PropositionContainer extends Component {
@@ -12,7 +12,9 @@ class PropositionContainer extends Component {
 
   render() {
     return this.props.loading ? (
-      <img src={logo} className="App-logo" alt="logo" />
+      <div>
+      	<center><ReactLoading type="bars" color="#e83737" height={50} width={200}  /></center>
+			</div>
     ) : (
       <Propositions
         propositions={this.props.propositions}

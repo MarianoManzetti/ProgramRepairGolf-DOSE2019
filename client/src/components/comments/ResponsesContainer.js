@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Responses from './Responses';
-import logo from '../../logo.svg';
+import ReactLoading from 'react-loading';
 import Comment from './Comment';
 import { fetchResponses, fetchAddResponse } from '../../actions/comment/responsesActions';
 import AddResponse from './AddResponse';
@@ -36,7 +36,9 @@ class ResponsesContainer extends Component {
     const cant = this.props.responses.count;
 		const comment= this.props.comment;
 		return this.props.loading ? (
-      <img src={logo} className="App-logo" alt="logo" />
+      <div>
+      	<center><ReactLoading type="bars" color="#e83737" height={50} width={200}  /></center>
+			</div>
 		) : (
       <div>
        <div>

@@ -1,7 +1,8 @@
 import {
     FETCH_ALL_TEST_CHALLENGE_REQUEST,
     FETCH_ALL_TEST_CHALLENGE_SUCCESS,
-    FETCH_ALL_TEST_CHALLENGE_FAILURE
+    FETCH_ALL_TEST_CHALLENGE_FAILURE,
+    DELETE_CHALLENGE
 } from '../../constants/ActionTypesChallenges'
 
 const initTestChallengeState = {
@@ -12,9 +13,9 @@ const initTestChallengeState = {
 
 
 const allTestChallengeReducer = (state = initTestChallengeState, action) => {
-    
+
     switch(action.type) {
-        
+ 
         case FETCH_ALL_TEST_CHALLENGE_REQUEST:
             return {
                 ...state,
@@ -29,7 +30,6 @@ const allTestChallengeReducer = (state = initTestChallengeState, action) => {
                 error: ''
             }
 
-
         case FETCH_ALL_TEST_CHALLENGE_FAILURE:
             return {
                 ...state,
@@ -38,9 +38,17 @@ const allTestChallengeReducer = (state = initTestChallengeState, action) => {
                 error: action.payload,
             }
 
+        case DELETE_CHALLENGE:
+            return {
+                ...state,
+                data: state.data.filter(challenge => challenge.id !== action.id)
+            }
+
         default:
             return state
+
     }
+
 }
 
 export default allTestChallengeReducer;

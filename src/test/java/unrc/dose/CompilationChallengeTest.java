@@ -104,9 +104,9 @@ public class CompilationChallengeTest {
 	@Test
 	public void addCompilationChallengeTest() {
 		int userId = 32; 
-		String title= "Hello Word";
-		String nameClass = "HelloWord3";
-		String description = "Test Hellos Word";
+		String title= "Hello Word Test";
+		String nameClass = "HelloWordTest";
+		String description = "Test Hello Word";
 		String source = "System.out.println('Hello Word')";
 		int point = 52;
 		int ownerSolutionId = 3;
@@ -207,8 +207,8 @@ public class CompilationChallengeTest {
 	@Test
 	public void deleteCompilationChallengeTest() {
 		int userId = 5; 
-		String title= "Hello Word";
-		String className = "HelloWord4";
+		String title= "Hello Word Test";
+		String className = "HelloWordTest";
 		String description = "Test Hellos Word";
 		String source = "System.out.println('Hello Word')";
 		int point = 300;

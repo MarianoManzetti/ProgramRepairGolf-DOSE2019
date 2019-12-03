@@ -2,7 +2,6 @@ package unrc.dose;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -35,19 +34,82 @@ public class TestChallengeTest {
 		User u = User.set("test", "1234", "test@example.com", true);
 		User u1 = User.set("test1", "1234", "test1@example.com", false);
 
-		TestChallenge.addTestChallenge(u.getInteger("id"), "Test", "Test", "description",
-		"ssource", 100, 1, "test");
+		String source = "package src.main;\n";
+			   source += "public class One {\n";
+			   source += "	public static int one() {\n";
+			   source += "		return 1;\n";
+			   source += "	}\n";
+			   source += "}";
+		String test = "package src.test;\n";
+				test += "import src.main.One;\n";
+				test += "import org.junit.*;\n";
+				test += "public class OneTest {\n";
+				test += "	@Test\n";
+				test += "	public void test() {\n";
+				test += "		Assert.assertEquals(1, One.one());\n";
+				test += "	}\n";
+				test += "}";
+		TestChallenge.addTestChallenge(u.getInteger("id"), "Test", "One", "description",
+		source, 100, 1, test);
 		Challenge c = Challenge.findFirst("title = ?", "Test");
-		TestChallenge.addTestChallenge(u.getInteger("id"), "Test1", "Test1", "description",
-		"source", 100, 0, "test");
+
+		source = "package src.main;\n";
+		source += "public class One1 {\n";
+		source += "	public static int one() {\n";
+		source += "		return 1;\n";
+		source += "	}\n";
+		source += "}";
+		test = "package src.test;\n";
+		test += "import src.main.One1;\n";
+		test += "import org.junit.*;\n";
+		test += "public class One1Test {\n";
+		test += "	@Test\n";
+		test += "	public void test() {\n";
+		test += "		Assert.assertEquals(1, One1.one());\n";
+		test += "	}\n";
+		test += "}";
+		TestChallenge.addTestChallenge(u.getInteger("id"), "Test1", "One1", "description",
+		source, 100, 0, test);
 		Challenge c1 = Challenge.findFirst("title = ?", "Test1");
-		TestChallenge.addTestChallenge(u.getInteger("id"), "Test2", "Test2", "description",
-		"source", 100, 0, "test");
+
+		source = "package src.main;\n";
+		source += "public class One2 {\n";
+		source += "	public static int one() {\n";
+		source += "		return 1;\n";
+		source += "	}\n";
+		source += "}";
+		test = "package src.test;\n";
+		test += "import src.main.One2;\n";
+		test += "import org.junit.*;\n";
+		test += "public class One2Test {\n";
+		test += "	@Test\n";
+		test += "	public void test() {\n";
+		test += "		Assert.assertEquals(1, One2.one());\n";
+		test += "	}\n";
+		test += "}";
+		TestChallenge.addTestChallenge(u.getInteger("id"), "Test2", "One2", "description",
+		source, 100, 0, test);
 		Challenge c2 = Challenge.findFirst("title = ?", "Test2");
-		TestChallenge.addTestChallenge(u.getInteger("id"), "Test3", "Test3", "description",
-		"source", 100, 0, "test");
+
+		source = "package src.main;\n";
+		source += "public class One3 {\n";
+		source += "	public static int one() {\n";
+		source += "		return 1;\n";
+		source += "	}\n";
+		source += "}";
+		test = "package src.test;\n";
+		test += "import src.main.One3;\n";
+		test += "import org.junit.*;\n";
+		test += "public class One3Test {\n";
+		test += "	@Test\n";
+		test += "	public void test() {\n";
+		test += "		Assert.assertEquals(1, One3.one());\n";
+		test += "	}\n";
+		test += "}";
+		TestChallenge.addTestChallenge(u.getInteger("id"), "Test3", "One3", "description",
+		source, 100, 0, test);
 		CompilationChallenge.addCompilationChallenge(u.getInteger("id"), "Test4", "Test4", "description",
-		"source", 100, 0);
+		source, 100, 0);
 
 		Proposition.newProposition(u.getInteger("id"),c.getInteger("id"));
 		Proposition p1 = Proposition.newProposition(u.getInteger("id"), c1.getInteger("id"));
@@ -249,17 +311,28 @@ public class TestChallengeTest {
 	public void deleteTestChallengeTest() {
 		int userId = 5; 
 		String title= "Hello Word";
-		String className = "HelloWord4";
-		String description = "Test Hellos Word";
-		String source = "System.out.println('Hello Word')";
-		int point = 300;
+		String className = "MultOnes1";
+		String description = "";
+		String source = "package src.main;\n";
+			   source += "public class MultOnes1 {\n";
+			   source += "	public static int multOnes1() {\n";
+			   source += "		return 1*1;\n";
+			   source += "	}\n";
+			   source += "}";
+		int point = 0;
+		String test = "package src.test;\n";
+			   test += "import src.main.MultOnes1;\n";
+			   test += "import org.junit.*;\n";
+			   test += "public class MultOnes1Test {\n";
+			   test += "	@Test\n";
+			   test += "	public void test() {\n";
+			   test += "		Assert.assertEquals(1, MultOnes1.multOnes());\n";
+			   test += "	}\n";
+			   test += "}";
 		int ownerSolutionId = 10;
-		String test = "delete Test";
 		TestChallenge.addTestChallenge(userId, title, className, description,
 		source, point, ownerSolutionId, test);
-		int id = TestChallenge.findFirst("test = ?", test).getInteger("challenge_id");
-		Challenge.deleteChallenge(id);
-		assertNull(TestChallenge.findFirst("challenge_id = ?", id));   
+		assertNull(TestChallenge.findFirst("test = ?", test));   
 	}
 
 	/**

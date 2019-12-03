@@ -9,14 +9,16 @@ const Navbar = (props) => {
       <Link className="brand-logo" to="/">Program Repair Game</Link>
       <ul className="right">
 
-        <li><NavLink exact to="/">Home</NavLink></li>
-        <li><NavLink to='/about'>About</NavLink></li>
-        <li><NavLink to='/hackers'>Hackers</NavLink></li>
         <li><NavLink to='/propositions'>Propositions</NavLink></li>
-
         <li><NavLink to='/userstats'>Statistics</NavLink></li>
         <li><NavLink to='/challenge'>Challenge</NavLink></li>
         <li><NavLink to='/comments'> Comments </NavLink></li>
+        <li><NavLink style={{background:'white',color:'red'}} onClick={ () => f.signout() } to={{pathname:'/'}}
+              activeStyle={{background:'#f63c3c',color:'#f63c3c'}}
+              isActive={(match, location) => {if (!match) {
+                return false;}
+              return match.isExact;
+            }}>Cerrar Sesion</NavLink></li>
       </ul>
     </div>
   </nav>

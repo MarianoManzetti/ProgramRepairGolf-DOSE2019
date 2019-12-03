@@ -10,11 +10,7 @@ const UserStat = (props) => {
         <div>
             <div class="left">
                 <IndividualStatsContainer />
-                <Link onClick= {f.signout} to= "/"></Link>
-            </div>
-            <div className= "buttonRight">
-              <Link style={{background:'white',color:'red'}} onClick= {f.signout} to= "/">Cerrar Sesion</Link>
-            </div>
+            </div>    
             <div class="right">
                 <RankingContainer />
             </div>
