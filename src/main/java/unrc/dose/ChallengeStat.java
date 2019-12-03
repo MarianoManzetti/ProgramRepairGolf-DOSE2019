@@ -166,8 +166,8 @@ public class ChallengeStat extends Model implements Comparable {
     @Override
     public boolean equals(final Object cs) {
         ChallengeStat cs2 = (ChallengeStat) cs;
-
-        return (this.getInteger("id") == cs2.getInteger("id"));
+        
+        return ((int) this.getId() == (int) cs2.getId());
     }
 
     /**
